@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="FlackoB — Liberian Recording Artist, Songwriter, Performer & Entertainer based in Ghana. Official website." />
-<meta name="keywords" content="FlackoB, Liberian artist, Afrobeat, Afropop, Hip-Hop, Drill, Ghana, Liberia, Music" />
+<meta name="keywords" content="FlackoB, Liberian artist, Afrobeat, Afropop, Hip-Hop, Drill, Trap, Ghana, Liberia, Music" />
 <meta name="author" content="FlackoB" />
 <title>FlackoB — Official Website | Liberian Recording Artist</title>
 
@@ -47,7 +47,7 @@
    RESET & BASE
 ============================================ */
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
+html{scroll-behavior:smooth}
 body{
   font-family:'Poppins',sans-serif;
   background:var(--bg-primary);
@@ -66,6 +66,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--bg-primary)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-dark));border-radius:10px}
+
+/* ============================================
+   PAGE-BASED NAVIGATION
+============================================ */
+.page{display:none;animation:pageFade .6s var(--transition)}
+.page.active{display:block}
+@keyframes pageFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 /* ============================================
    LOADING SCREEN
@@ -128,6 +135,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-size:2rem;letter-spacing:4px;
   color:var(--gold);
   position:relative;
+  cursor:pointer;
 }
 .nav-logo span{color:var(--white)}
 .nav-logo::after{
@@ -139,7 +147,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .nav-menu a{
   font-size:.85rem;font-weight:500;letter-spacing:2px;
   text-transform:uppercase;position:relative;padding:5px 0;
-  color:var(--light-grey);
+  color:var(--light-grey);cursor:pointer;
 }
 .nav-menu a::after{
   content:'';position:absolute;bottom:0;left:50%;
@@ -249,15 +257,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   box-shadow:var(--shadow-gold);
 }
 
-/* Scroll Indicator */
-.scroll-indicator{
-  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
-  color:var(--gold);font-size:.7rem;letter-spacing:3px;
-  text-transform:uppercase;
-  animation:fadeUp 1s 1.2s both;
-}
-.scroll-indicator i{display:block;margin-top:10px;font-size:1.2rem;animation:bounce 2s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
 /* ============================================
@@ -279,6 +278,41 @@ section{padding:120px 5%;position:relative}
   color:var(--muted);max-width:600px;margin:0 auto;
   font-size:1rem;
 }
+
+/* Coming Soon Card */
+.coming-soon{
+  max-width:700px;margin:0 auto;
+  padding:80px 40px;text-align:center;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:25px;
+  position:relative;overflow:hidden;
+}
+.coming-soon::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(212,175,55,.08) 0%,transparent 70%);
+}
+.coming-soon-icon{
+  width:90px;height:90px;margin:0 auto 25px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  display:flex;align-items:center;justify-content:center;
+  color:#000;font-size:2rem;
+  box-shadow:0 15px 40px rgba(212,175,55,.3);
+  animation:float 3s ease-in-out infinite;
+}
+.coming-soon h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  color:var(--white);letter-spacing:3px;
+  margin-bottom:15px;position:relative;
+}
+.coming-soon p{
+  color:var(--muted);font-size:1rem;
+  max-width:500px;margin:0 auto;
+  position:relative;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* ============================================
    ABOUT SECTION
@@ -497,54 +531,6 @@ section{padding:120px 5%;position:relative}
 }
 
 /* ============================================
-   VIDEOS SECTION
-============================================ */
-.videos{background:var(--bg-secondary)}
-.video-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;max-width:1300px;margin:0 auto;
-}
-.video-card{
-  position:relative;border-radius:20px;overflow:hidden;
-  aspect-ratio:16/9;cursor:pointer;
-  transition:all .5s var(--transition);
-}
-.video-card:hover{transform:translateY(-8px)}
-.video-thumb{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .6s var(--transition);
-}
-.video-card:hover .video-thumb{transform:scale(1.1)}
-.video-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.9) 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:25px;
-}
-.video-play{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:70px;height:70px;border-radius:50%;
-  background:rgba(212,175,55,.9);color:#000;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;transition:all .4s var(--transition);
-  box-shadow:0 0 0 0 rgba(212,175,55,.6);
-}
-.video-card:hover .video-play{
-  transform:translate(-50%,-50%) scale(1.15);
-  box-shadow:0 0 0 20px rgba(212,175,55,0);
-}
-.video-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.5rem;color:var(--white);
-  letter-spacing:1px;margin-bottom:5px;
-}
-.video-platform{
-  color:var(--gold);font-size:.75rem;
-  letter-spacing:2px;text-transform:uppercase;
-}
-
-/* ============================================
    TIKTOK SECTION
 ============================================ */
 .tiktok-section{
@@ -650,60 +636,6 @@ section{padding:120px 5%;position:relative}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ============================================
-   EVENTS
-============================================ */
-.events-list{max-width:1000px;margin:0 auto}
-.event-card{
-  display:grid;grid-template-columns:120px 1fr auto;
-  gap:30px;align-items:center;
-  padding:30px;margin-bottom:20px;
-  background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:20px;transition:all .4s var(--transition);
-  position:relative;overflow:hidden;
-}
-.event-card::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  width:4px;background:var(--gold);
-  transform:scaleY(0);transform-origin:top;
-  transition:transform .4s var(--transition);
-}
-.event-card:hover{
-  transform:translateX(10px);
-  border-color:var(--gold);
-  background:rgba(212,175,55,.05);
-}
-.event-card:hover::before{transform:scaleY(1)}
-.event-date{
-  text-align:center;padding:15px;
-  border-right:1px solid var(--glass-border);
-}
-.event-day{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:3rem;color:var(--gold);line-height:1;
-}
-.event-month{
-  font-size:.8rem;letter-spacing:3px;
-  text-transform:uppercase;color:var(--light-grey);
-  margin-top:5px;
-}
-.event-info h3{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.8rem;color:var(--white);
-  letter-spacing:1px;margin-bottom:8px;
-}
-.event-info p{color:var(--muted);font-size:.9rem}
-.event-info p i{color:var(--gold);margin-right:8px}
-.event-action .btn{padding:12px 28px;font-size:.75rem}
-.btn-soldout{
-  background:var(--liberian-red);color:#fff;
-  cursor:not-allowed;opacity:.8;
-}
-@media (max-width:700px){
-  .event-card{grid-template-columns:1fr;text-align:center;gap:15px;padding:25px}
-  .event-date{border-right:none;border-bottom:1px solid var(--glass-border);padding-bottom:15px}
-}
-
-/* ============================================
    BOOKING
 ============================================ */
 .booking{
@@ -741,7 +673,7 @@ section{padding:120px 5%;position:relative}
 @media (max-width:600px){.form-row{grid-template-columns:1fr}}
 
 /* ============================================
-   CONTACT
+   CONTACT (WHATSAPP)
 ============================================ */
 .contact{background:var(--bg-secondary)}
 .contact-grid{
@@ -752,6 +684,7 @@ section{padding:120px 5%;position:relative}
   padding:40px 30px;text-align:center;
   background:var(--glass);border:1px solid var(--glass-border);
   border-radius:20px;transition:all .4s var(--transition);
+  display:block;
 }
 .contact-card:hover{
   transform:translateY(-8px);
@@ -761,10 +694,10 @@ section{padding:120px 5%;position:relative}
 .contact-icon{
   width:70px;height:70px;margin:0 auto 20px;
   border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  background:linear-gradient(135deg,#25D366,#128C7E);
   display:flex;align-items:center;justify-content:center;
-  color:#000;font-size:1.5rem;
-  box-shadow:0 10px 30px rgba(212,175,55,.3);
+  color:#fff;font-size:1.8rem;
+  box-shadow:0 10px 30px rgba(37,211,102,.3);
 }
 .contact-card h3{
   font-family:'Bebas Neue',sans-serif;
@@ -772,8 +705,10 @@ section{padding:120px 5%;position:relative}
   letter-spacing:2px;margin-bottom:10px;
 }
 .contact-card p{color:var(--light-grey);font-size:.9rem;line-height:1.7}
-.contact-card a{color:var(--gold)}
-.contact-card a:hover{text-decoration:underline}
+.contact-card .whatsapp-number{
+  color:var(--gold);font-weight:600;
+  font-size:1rem;margin-top:10px;display:block;
+}
 
 /* ============================================
    SOCIALS
@@ -833,11 +768,6 @@ section{padding:120px 5%;position:relative}
   border-radius:25px;
   box-shadow:var(--shadow-soft);
 }
-.newsletter-card h2{
-  font-size:clamp(2rem,4vw,3rem);
-  color:var(--white);margin-bottom:15px;
-}
-.newsletter-card p{color:var(--muted);margin-bottom:30px}
 .newsletter-form{
   display:flex;gap:10px;max-width:500px;margin:0 auto;
   position:relative;
@@ -897,6 +827,10 @@ footer{
   text-align:center;color:var(--muted);font-size:.85rem;
 }
 .footer-bottom .heart{color:var(--liberian-red);animation:pulse 1.5s infinite}
+.footer-powered{
+  margin-top:15px;color:var(--gold);
+  font-size:.85rem;letter-spacing:1px;
+}
 @media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;gap:30px}}
 @media (max-width:500px){.footer-grid{grid-template-columns:1fr}}
 
@@ -928,10 +862,6 @@ footer{
 .reveal-zoom{transform:scale(.8)}
 .reveal-zoom.active{transform:scale(1)}
 
-/* Floating animation */
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.float{animation:float 3s ease-in-out infinite}
-
 /* Focus states */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   outline:2px solid var(--gold);outline-offset:3px;
@@ -957,24 +887,24 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
      NAVIGATION
 ============================================ -->
 <nav class="navbar" id="navbar">
-  <a href="#home" class="nav-logo">FLACKO<span>B</span></a>
+  <a class="nav-logo" data-page="home">FLACKO<span>B</span></a>
   <ul class="nav-menu" id="navMenu">
-    <li><a href="#home" class="active">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#videos">Videos</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#events">Events</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#socials">Socials</a></li>
+    <li><a data-page="home" class="active">Home</a></li>
+    <li><a data-page="about">About</a></li>
+    <li><a data-page="music">Music</a></li>
+    <li><a data-page="videos">Videos</a></li>
+    <li><a data-page="gallery">Gallery</a></li>
+    <li><a data-page="events">Events</a></li>
+    <li><a data-page="contact">Contact</a></li>
+    <li><a data-page="socials">Socials</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 </nav>
 
 <!-- ============================================
-     HERO
+     PAGE: HOME (HERO)
 ============================================ -->
-<section class="hero" id="home">
+<section class="hero page active" id="home">
   <div class="hero-bg"></div>
   <canvas id="particles-canvas"></canvas>
   <div class="hero-content">
@@ -983,21 +913,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <p class="hero-subtitle" id="typingText"></p>
     <p class="hero-quote">"Taking Liberia's sound to Africa and the World."</p>
     <div class="hero-buttons">
-      <a href="#music" class="btn btn-primary"><i class="fas fa-play"></i> Listen Now</a>
-      <a href="#videos" class="btn btn-outline"><i class="fas fa-video"></i> Watch Videos</a>
-      <a href="#booking" class="btn btn-ghost"><i class="fas fa-calendar-check"></i> Book FlackoB</a>
+      <a class="btn btn-primary" data-page="music"><i class="fas fa-play"></i> Listen Now</a>
+      <a class="btn btn-outline" data-page="videos"><i class="fas fa-video"></i> Watch Videos</a>
+      <a class="btn btn-ghost" data-page="booking"><i class="fas fa-calendar-check"></i> Book FlackoB</a>
     </div>
-  </div>
-  <div class="scroll-indicator">
-    Scroll
-    <i class="fas fa-chevron-down"></i>
   </div>
 </section>
 
 <!-- ============================================
-     ABOUT
+     PAGE: ABOUT
 ============================================ -->
-<section class="about" id="about">
+<section class="about page" id="about">
   <div class="about-grid">
     <div class="about-image reveal reveal-left">
       <img src="images/flackob-1.jpg" alt="FlackoB - Liberian Recording Artist" onerror="this.style.background='linear-gradient(135deg,#002868,#BF0A30)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
@@ -1009,23 +935,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <strong style="color:var(--gold)">FlackoB</strong> is a Liberian recording artist, songwriter, performer and entertainer currently based in Ghana — one of Africa's most vibrant music capitals. Born and raised in Liberia, he carries the heartbeat of West Africa in every verse, blending the raw energy of his homeland with the polished pulse of contemporary African sound.
       </p>
       <p>
-        His music fuses <strong>Afrobeat, Afropop, Hip-Hop, Drill</strong> and modern African rhythms into a signature style that speaks to a generation hungry for authenticity. From Monrovia to Accra, FlackoB is building a bridge between cultures — crafting anthems that move dancefloors, touch hearts and put Liberia firmly on the global music map.
+        His music fuses <strong>Afrobeat, Afropop, Hip-Hop, Drill, Trap</strong> and modern African rhythms into a signature style that speaks to a generation hungry for authenticity. From Monrovia to Accra, FlackoB is building a bridge between cultures — crafting anthems that move dancefloors, touch hearts and put Liberia firmly on the global music map.
       </p>
       <div class="about-stats">
         <div class="stat-card">
-          <span class="stat-number" data-count="45">0</span>
+          <span class="stat-number" data-count="10">0</span>
           <div class="stat-label">Songs Released</div>
         </div>
         <div class="stat-card">
-          <span class="stat-number" data-count="120">0</span>
+          <span class="stat-number" data-count="10">0</span>
           <div class="stat-label">Shows Performed</div>
         </div>
         <div class="stat-card">
-          <span class="stat-number" data-count="250">0</span>
+          <span class="stat-number" data-count="400">0</span>
           <div class="stat-label">K+ Followers</div>
         </div>
         <div class="stat-card">
-          <span class="stat-number" data-count="6">0</span>
+          <span class="stat-number" data-count="8">0</span>
           <div class="stat-label">Years Active</div>
         </div>
       </div>
@@ -1034,9 +960,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </section>
 
 <!-- ============================================
-     FEATURED MUSIC
+     PAGE: MUSIC
 ============================================ -->
-<section class="music" id="music">
+<section class="page" id="music">
   <div class="section-header reveal">
     <span class="section-tag">Discography</span>
     <h2 class="section-title">Featured <span class="gold">Music</span></h2>
@@ -1112,39 +1038,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       </div>
     </div>
   </div>
-</section>
 
-<!-- ============================================
-     MUSIC PLAYER
-============================================ -->
-<section class="player-section">
-  <div class="section-header reveal">
-    <span class="section-tag">Now Playing</span>
-    <h2 class="section-title">Listen <span class="gold">Live</span></h2>
-  </div>
-  <div class="player reveal-zoom">
-    <div class="player-art" id="playerArt">
-      <img src="images/cover1.jpg" alt="Now Playing" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+  <!-- Music Player -->
+  <div class="player-section" style="margin-top:100px">
+    <div class="section-header reveal">
+      <span class="section-tag">Now Playing</span>
+      <h2 class="section-title">Listen <span class="gold">Live</span></h2>
     </div>
-    <div class="player-info">
-      <h3 id="songTitle">Monrovia Nights</h3>
-      <p class="artist">FlackoB</p>
-      <div class="player-progress">
-        <div class="progress-bar" id="progressBar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="progress-time">
-          <span id="currentTime">0:00</span>
-          <span id="duration">3:45</span>
-        </div>
+    <div class="player reveal-zoom">
+      <div class="player-art" id="playerArt">
+        <img src="images/cover1.jpg" alt="Now Playing" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
       </div>
-      <div class="player-controls">
-        <button class="ctrl-btn" id="prevBtn" aria-label="Previous"><i class="fas fa-backward-step"></i></button>
-        <button class="ctrl-btn play-btn" id="playBtn" aria-label="Play"><i class="fas fa-play" id="playIcon"></i></button>
-        <button class="ctrl-btn" id="nextBtn" aria-label="Next"><i class="fas fa-forward-step"></i></button>
-        <div class="volume-control">
-          <i class="fas fa-volume-high"></i>
-          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
+      <div class="player-info">
+        <h3 id="songTitle">Monrovia Nights</h3>
+        <p class="artist">FlackoB</p>
+        <div class="player-progress">
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-time">
+            <span id="currentTime">0:00</span>
+            <span id="duration">3:45</span>
+          </div>
+        </div>
+        <div class="player-controls">
+          <button class="ctrl-btn" id="prevBtn" aria-label="Previous"><i class="fas fa-backward-step"></i></button>
+          <button class="ctrl-btn play-btn" id="playBtn" aria-label="Play"><i class="fas fa-play" id="playIcon"></i></button>
+          <button class="ctrl-btn" id="nextBtn" aria-label="Next"><i class="fas fa-forward-step"></i></button>
+          <div class="volume-control">
+            <i class="fas fa-volume-high"></i>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" aria-label="Volume">
+          </div>
         </div>
       </div>
     </div>
@@ -1152,94 +1076,58 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </section>
 
 <!-- ============================================
-     VIDEOS
+     PAGE: VIDEOS
 ============================================ -->
-<section class="videos" id="videos">
+<section class="page" id="videos">
   <div class="section-header reveal">
     <span class="section-tag">Visuals</span>
     <h2 class="section-title">Official <span class="gold">Videos</span></h2>
     <p class="section-desc">Cinematic visuals that bring FlackoB's music to life.</p>
   </div>
-  <div class="video-grid">
-    <div class="video-card reveal">
-      <img src="images/video1.jpg" alt="Monrovia Nights Video" class="video-thumb" onerror="this.style.background='linear-gradient(135deg,#002868,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <div class="video-overlay">
-        <div class="video-play"><i class="fas fa-play"></i></div>
-        <h3 class="video-title">Monrovia Nights (Official Video)</h3>
-        <span class="video-platform"><i class="fab fa-youtube"></i> YouTube</span>
+  <div class="coming-soon reveal-zoom">
+    <div class="coming-soon-icon"><i class="fas fa-film"></i></div>
+    <h3>Coming Soon</h3>
+    <p>New music videos, visualizers and behind-the-scenes content are on the way. Stay tuned for exclusive visuals dropping soon.</p>
+  </div>
+
+  <!-- TikTok Section (no header, 3 cards only) -->
+  <div class="tiktok-section" style="margin-top:100px;padding:0">
+    <div class="tiktok-grid">
+      <div class="tiktok-card reveal">
+        <img src="images/tiktok1.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#ff0050,#00f2ea)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+        <span class="tiktok-music"><i class="fas fa-music"></i> Original Sound</span>
+        <div class="tiktok-stats">
+          <span class="tiktok-views"><i class="fas fa-play"></i>2.4M</span>
+          <span class="tiktok-views"><i class="fas fa-heart"></i>340K</span>
+        </div>
+      </div>
+      <div class="tiktok-card reveal">
+        <img src="images/tiktok2.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#00f2ea,#ff0050)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+        <span class="tiktok-music"><i class="fas fa-music"></i> Monrovia Nights</span>
+        <div class="tiktok-stats">
+          <span class="tiktok-views"><i class="fas fa-play"></i>1.8M</span>
+          <span class="tiktok-views"><i class="fas fa-heart"></i>220K</span>
+        </div>
+      </div>
+      <div class="tiktok-card reveal">
+        <img src="images/tiktok3.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+        <span class="tiktok-music"><i class="fas fa-music"></i> Gold Coast</span>
+        <div class="tiktok-stats">
+          <span class="tiktok-views"><i class="fas fa-play"></i>980K</span>
+          <span class="tiktok-views"><i class="fas fa-heart"></i>150K</span>
+        </div>
       </div>
     </div>
-    <div class="video-card reveal">
-      <img src="images/video2.jpg" alt="Gold Coast Video" class="video-thumb" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <div class="video-overlay">
-        <div class="video-play"><i class="fas fa-play"></i></div>
-        <h3 class="video-title">Gold Coast (Visualizer)</h3>
-        <span class="video-platform"><i class="fab fa-tiktok"></i> TikTok</span>
-      </div>
-    </div>
-    <div class="video-card reveal">
-      <img src="images/video3.jpg" alt="Liberian Dream Video" class="video-thumb" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <div class="video-overlay">
-        <div class="video-play"><i class="fas fa-play"></i></div>
-        <h3 class="video-title">Liberian Dream (Live Session)</h3>
-        <span class="video-platform"><i class="fab fa-instagram"></i> Instagram Reels</span>
-      </div>
+    <div class="tiktok-cta reveal" style="margin-top:50px">
+      <a href="#" class="btn-tiktok"><i class="fab fa-tiktok"></i> Follow on TikTok</a>
     </div>
   </div>
 </section>
 
 <!-- ============================================
-     TIKTOK
+     PAGE: GALLERY
 ============================================ -->
-<section class="tiktok-section">
-  <div class="section-header reveal">
-    <span class="section-tag">Viral Moments</span>
-    <h2 class="section-title">On <span class="gold">TikTok</span></h2>
-    <p class="section-desc">Trending sounds, dances and moments from the FlackoB universe.</p>
-  </div>
-  <div class="tiktok-grid">
-    <div class="tiktok-card reveal">
-      <img src="images/tiktok1.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#ff0050,#00f2ea)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <span class="tiktok-music"><i class="fas fa-music"></i> Original Sound</span>
-      <div class="tiktok-stats">
-        <span class="tiktok-views"><i class="fas fa-play"></i>2.4M</span>
-        <span class="tiktok-views"><i class="fas fa-heart"></i>340K</span>
-      </div>
-    </div>
-    <div class="tiktok-card reveal">
-      <img src="images/tiktok2.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#00f2ea,#ff0050)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <span class="tiktok-music"><i class="fas fa-music"></i> Monrovia Nights</span>
-      <div class="tiktok-stats">
-        <span class="tiktok-views"><i class="fas fa-play"></i>1.8M</span>
-        <span class="tiktok-views"><i class="fas fa-heart"></i>220K</span>
-      </div>
-    </div>
-    <div class="tiktok-card reveal">
-      <img src="images/tiktok3.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <span class="tiktok-music"><i class="fas fa-music"></i> Gold Coast</span>
-      <div class="tiktok-stats">
-        <span class="tiktok-views"><i class="fas fa-play"></i>980K</span>
-        <span class="tiktok-views"><i class="fas fa-heart"></i>150K</span>
-      </div>
-    </div>
-    <div class="tiktok-card reveal">
-      <img src="images/tiktok4.jpg" alt="TikTok video" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
-      <span class="tiktok-music"><i class="fas fa-music"></i> Accra Vibes</span>
-      <div class="tiktok-stats">
-        <span class="tiktok-views"><i class="fas fa-play"></i>750K</span>
-        <span class="tiktok-views"><i class="fas fa-heart"></i>98K</span>
-      </div>
-    </div>
-  </div>
-  <div class="tiktok-cta reveal">
-    <a href="#" class="btn-tiktok"><i class="fab fa-tiktok"></i> Follow on TikTok</a>
-  </div>
-</section>
-
-<!-- ============================================
-     GALLERY
-============================================ -->
-<section class="gallery" id="gallery">
+<section class="gallery page" id="gallery">
   <div class="section-header reveal">
     <span class="section-tag">Moments</span>
     <h2 class="section-title">Photo <span class="gold">Gallery</span></h2>
@@ -1249,15 +1137,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <div class="gallery-item reveal"><img src="images/gallery1.jpg" alt="Gallery 1" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22/>'"></div>
     <div class="gallery-item reveal"><img src="images/gallery2.jpg" alt="Gallery 2" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22/>'"></div>
     <div class="gallery-item reveal"><img src="images/gallery3.jpg" alt="Gallery 3" onerror="this.style.background='linear-gradient(135deg,#002868,#D4AF37)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 600%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery4.jpg" alt="Gallery 4" onerror="this.style.background='linear-gradient(135deg,#111,#D4AF37)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 400%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery5.jpg" alt="Gallery 5" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#D4AF37)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 550%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery6.jpg" alt="Gallery 6" onerror="this.style.background='linear-gradient(135deg,#002868,#BF0A30)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 350%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery7.jpg" alt="Gallery 7" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#BF0A30)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 450%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery8.jpg" alt="Gallery 8" onerror="this.style.background='linear-gradient(135deg,#000,#D4AF37)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery9.jpg" alt="Gallery 9" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 380%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery10.jpg" alt="Gallery 10" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 520%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery11.jpg" alt="Gallery 11" onerror="this.style.background='linear-gradient(135deg,#002868,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 420%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery12.jpg" alt="Gallery 12" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#D4AF37)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 480%22/>'"></div>
   </div>
 </section>
 
@@ -1268,92 +1147,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </div>
 
 <!-- ============================================
-     EVENTS
+     PAGE: EVENTS
 ============================================ -->
-<section class="events" id="events">
+<section class="page" id="events">
   <div class="section-header reveal">
     <span class="section-tag">Tour Dates</span>
     <h2 class="section-title">Upcoming <span class="gold">Shows</span></h2>
     <p class="section-desc">Catch FlackoB live. Limited tickets available.</p>
   </div>
-  <div class="events-list">
-    <div class="event-card reveal">
-      <div class="event-date">
-        <div class="event-day">25</div>
-        <div class="event-month">Jul 2026</div>
-      </div>
-      <div class="event-info">
-        <h3>Accra Afrobeat Fest</h3>
-        <p><i class="fas fa-location-dot"></i>Independence Arena, Accra, Ghana</p>
-        <p><i class="fas fa-clock"></i>8:00 PM • Gates Open 6:00 PM</p>
-      </div>
-      <div class="event-action">
-        <a href="#" class="btn btn-primary">Get Tickets</a>
-      </div>
-    </div>
-    <div class="event-card reveal">
-      <div class="event-date">
-        <div class="event-day">08</div>
-        <div class="event-month">Aug 2026</div>
-      </div>
-      <div class="event-info">
-        <h3>Monrovia Homecoming</h3>
-        <p><i class="fas fa-location-dot"></i>Samuel K. Doe Sports Stadium, Monrovia</p>
-        <p><i class="fas fa-clock"></i>7:00 PM • Special Guest Appearance</p>
-      </div>
-      <div class="event-action">
-        <a href="#" class="btn btn-primary">Get Tickets</a>
-      </div>
-    </div>
-    <div class="event-card reveal">
-      <div class="event-date">
-        <div class="event-day">22</div>
-        <div class="event-month">Aug 2026</div>
-      </div>
-      <div class="event-info">
-        <h3>Lagos Afrobeats Night</h3>
-        <p><i class="fas fa-location-dot"></i>Eko Convention Centre, Lagos, Nigeria</p>
-        <p><i class="fas fa-clock"></i>9:00 PM</p>
-      </div>
-      <div class="event-action">
-        <a href="#" class="btn btn-soldout">Sold Out</a>
-      </div>
-    </div>
-    <div class="event-card reveal">
-      <div class="event-date">
-        <div class="event-day">14</div>
-        <div class="event-month">Sep 2026</div>
-      </div>
-      <div class="event-info">
-        <h3>African Music Awards</h3>
-        <p><i class="fas fa-location-dot"></i>O2 Arena, London, United Kingdom</p>
-        <p><i class="fas fa-clock"></i>7:30 PM • International Broadcast</p>
-      </div>
-      <div class="event-action">
-        <a href="#" class="btn btn-primary">Get Tickets</a>
-      </div>
-    </div>
-    <div class="event-card reveal">
-      <div class="event-date">
-        <div class="event-day">05</div>
-        <div class="event-month">Oct 2026</div>
-      </div>
-      <div class="event-info">
-        <h3>FlackoB Live in Johannesburg</h3>
-        <p><i class="fas fa-location-dot"></i>Joburg Theatre, South Africa</p>
-        <p><i class="fas fa-clock"></i>8:00 PM</p>
-      </div>
-      <div class="event-action">
-        <a href="#" class="btn btn-primary">Get Tickets</a>
-      </div>
-    </div>
+  <div class="coming-soon reveal-zoom">
+    <div class="coming-soon-icon"><i class="fas fa-calendar-star"></i></div>
+    <h3>Coming Soon</h3>
+    <p>Exciting tour dates and live performances are being planned. Stay tuned — something big is on the way.</p>
   </div>
 </section>
 
 <!-- ============================================
-     BOOKING
+     PAGE: BOOKING
 ============================================ -->
-<section class="booking" id="booking">
+<section class="booking page" id="booking">
   <div class="section-header reveal">
     <span class="section-tag">Private & Corporate</span>
     <h2 class="section-title">Book <span class="gold">FlackoB</span></h2>
@@ -1399,46 +1211,52 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </section>
 
 <!-- ============================================
-     CONTACT
+     PAGE: CONTACT (WHATSAPP)
 ============================================ -->
-<section class="contact" id="contact">
+<section class="contact page" id="contact">
   <div class="section-header reveal">
     <span class="section-tag">Get In Touch</span>
     <h2 class="section-title">Contact <span class="gold">Us</span></h2>
+    <p class="section-desc">All communication is handled via WhatsApp. Tap any card below to start a conversation.</p>
   </div>
   <div class="contact-grid">
-    <div class="contact-card reveal">
-      <div class="contact-icon"><i class="fas fa-briefcase"></i></div>
+    <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27m%20reaching%20out%20regarding%20management." class="contact-card reveal" target="_blank" rel="noopener">
+      <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
       <h3>Management</h3>
-      <p>For general inquiries<br><a href="mailto:management@flackob.com">management@flackob.com</a></p>
-    </div>
-    <div class="contact-card reveal">
-      <div class="contact-icon"><i class="fas fa-calendar-check"></i></div>
+      <p>For management inquiries</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
+    </a>
+    <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27d%20like%20to%20book%20you%20for%20an%20event." class="contact-card reveal" target="_blank" rel="noopener">
+      <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
       <h3>Bookings</h3>
-      <p>Live shows & events<br><a href="mailto:bookings@flackob.com">bookings@flackob.com</a></p>
-    </div>
-    <div class="contact-card reveal">
-      <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-      <h3>Press & Email</h3>
-      <p>Media & interviews<br><a href="mailto:press@flackob.com">press@flackob.com</a></p>
-    </div>
-    <div class="contact-card reveal">
-      <div class="contact-icon"><i class="fas fa-phone"></i></div>
-      <h3>Phone</h3>
-      <p>Direct line<br><a href="tel:+233000000000">+233 00 000 0000</a></p>
-    </div>
+      <p>Live shows & events</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
+    </a>
+    <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27m%20from%20the%20press%20and%20would%20like%20to%20arrange%20an%20interview." class="contact-card reveal" target="_blank" rel="noopener">
+      <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+      <h3>Press & Media</h3>
+      <p>Media & interviews</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
+    </a>
+    <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27d%20like%20to%20discuss%20a%20collaboration." class="contact-card reveal" target="_blank" rel="noopener">
+      <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+      <h3>Collaborations</h3>
+      <p>Features & features</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
+    </a>
     <div class="contact-card reveal">
       <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
       <h3>Location</h3>
-      <p>Accra, Ghana<br><span style="color:var(--muted)">Originally from Liberia</span></p>
+      <p>Accra, Ghana</p>
+      <span class="whatsapp-number" style="color:var(--muted)">Originally from Liberia</span>
     </div>
   </div>
 </section>
 
 <!-- ============================================
-     SOCIALS
+     PAGE: SOCIALS
 ============================================ -->
-<section class="socials-section" id="socials">
+<section class="socials-section page" id="socials">
   <div class="section-header reveal">
     <span class="section-tag">Stay Connected</span>
     <h2 class="section-title">Follow <span class="gold">FlackoB</span></h2>
@@ -1455,24 +1273,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <a href="#" class="social-icon apple float" aria-label="Apple Music"><i class="fab fa-apple"></i></a>
     <a href="#" class="social-icon x float" aria-label="X"><i class="fab fa-x-twitter"></i></a>
   </div>
-</section>
 
-<!-- ============================================
-     NEWSLETTER
-============================================ -->
-<section class="newsletter">
-  <div class="newsletter-card reveal-zoom">
-    <h2>Join the <span style="color:var(--gold)">Inner Circle</span></h2>
-    <p>Be the first to hear new releases, tour dates and exclusive content.</p>
-    <form class="newsletter-form" id="newsletterForm">
-      <input type="email" placeholder="Enter your email address" required aria-label="Email for newsletter">
-      <button type="submit">Subscribe</button>
-    </form>
+  <!-- Newsletter (no heading/description) -->
+  <div class="newsletter" style="margin-top:80px;padding:0;background:transparent">
+    <div class="newsletter-card reveal-zoom">
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email address" required aria-label="Email for newsletter">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
   </div>
 </section>
 
 <!-- ============================================
-     FOOTER
+     FOOTER (always visible)
 ============================================ -->
 <footer>
   <div class="footer-grid">
@@ -1483,19 +1297,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <div class="footer-col">
       <h4>Explore</h4>
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#music">Music</a></li>
-        <li><a href="#videos">Videos</a></li>
+        <li><a data-page="home">Home</a></li>
+        <li><a data-page="about">About</a></li>
+        <li><a data-page="music">Music</a></li>
+        <li><a data-page="videos">Videos</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Connect</h4>
       <ul>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#booking">Booking</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a data-page="gallery">Gallery</a></li>
+        <li><a data-page="events">Events</a></li>
+        <li><a data-page="booking">Booking</a></li>
+        <li><a data-page="contact">Contact</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1509,6 +1323,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   </div>
   <div class="footer-bottom">
     <p>© 2026 FlackoB. All Rights Reserved. Designed with <span class="heart">❤</span> for FlackoB.</p>
+    <p class="footer-powered">Powered by KS1 Empire Global Foundation (KS1EGF).</p>
   </div>
 </footer>
 
@@ -1536,45 +1351,75 @@ document.addEventListener('mousemove',e=>{
 });
 
 /* ============================================
-   NAVBAR
+   PAGE-BASED NAVIGATION
 ============================================ */
+const pages=document.querySelectorAll('.page');
+const navLinks=document.querySelectorAll('[data-page]');
 const navbar=document.getElementById('navbar');
 const navToggle=document.getElementById('navToggle');
 const navMenu=document.getElementById('navMenu');
-const navLinks=document.querySelectorAll('.nav-menu a');
 
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('scrolled',window.scrollY>50);
-  document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
-});
-
-navToggle.addEventListener('click',()=>{
-  navMenu.classList.toggle('open');
-  const icon=navToggle.querySelector('i');
-  icon.classList.toggle('fa-bars');
-  icon.classList.toggle('fa-times');
-});
+function showPage(pageId){
+  pages.forEach(p=>p.classList.remove('active'));
+  const target=document.getElementById(pageId);
+  if(target){
+    target.classList.add('active');
+    // Re-trigger reveal animations for the new page
+    target.querySelectorAll('.reveal').forEach(el=>{
+      el.classList.remove('active');
+      void el.offsetWidth; // force reflow
+      setTimeout(()=>el.classList.add('active'),50);
+    });
+    // Re-trigger counters if about page
+    if(pageId==='about'){
+      target.querySelectorAll('.stat-number').forEach(el=>{
+        const target2=+el.dataset.count;
+        let current=0;
+        const step=target2/60;
+        el.textContent='0';
+        const update=()=>{
+          current+=step;
+          if(current<target2){
+            el.textContent=Math.ceil(current);
+            requestAnimationFrame(update);
+          }else el.textContent=target2;
+        };
+        setTimeout(update,300);
+      });
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  // Update active nav link
+  document.querySelectorAll('.nav-menu a').forEach(link=>{
+    link.classList.remove('active');
+    if(link.dataset.page===pageId) link.classList.add('active');
+  });
+}
 
 navLinks.forEach(link=>{
-  link.addEventListener('click',()=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const pageId=link.dataset.page;
+    showPage(pageId);
+    // Close mobile menu if open
     navMenu.classList.remove('open');
     navToggle.querySelector('i').classList.add('fa-bars');
     navToggle.querySelector('i').classList.remove('fa-times');
   });
 });
 
-/* Active menu indicator on scroll */
-const sections=document.querySelectorAll('section[id]');
+/* Navbar scroll effect */
 window.addEventListener('scroll',()=>{
-  let current='';
-  sections.forEach(sec=>{
-    const top=sec.offsetTop-120;
-    if(window.scrollY>=top) current=sec.id;
-  });
-  navLinks.forEach(link=>{
-    link.classList.remove('active');
-    if(link.getAttribute('href')==='#'+current) link.classList.add('active');
-  });
+  navbar.classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
+});
+
+/* Mobile menu toggle */
+navToggle.addEventListener('click',()=>{
+  navMenu.classList.toggle('open');
+  const icon=navToggle.querySelector('i');
+  icon.classList.toggle('fa-bars');
+  icon.classList.toggle('fa-times');
 });
 
 /* ============================================
@@ -1584,7 +1429,7 @@ const typingEl=document.getElementById('typingText');
 const phrases=[
   'Liberian Recording Artist • Based in Ghana',
   'Songwriter • Performer • Entertainer',
-  'Afrobeat • Afropop • Hip-Hop • Drill',
+  'Afrobeat • Afropop • Hip-Hop • Drill • Trap',
   'Taking Liberia to the World'
 ];
 let pIndex=0,cIndex=0,isDeleting=false;
@@ -1637,7 +1482,6 @@ for(let i=0;i<60;i++) particles.push(new Particle());
 function animateParticles(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{p.update();p.draw()});
-  // Connect nearby particles
   for(let a=0;a<particles.length;a++){
     for(let b=a+1;b<particles.length;b++){
       const dx=particles[a].x-particles[b].x;
@@ -1658,9 +1502,8 @@ function animateParticles(){
 animateParticles();
 
 /* ============================================
-   SCROLL REVEAL
+   SCROLL REVEAL (for initial page)
 ============================================ */
-const revealEls=document.querySelectorAll('.reveal');
 const revealObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
@@ -1669,32 +1512,8 @@ const revealObs=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.15});
-revealEls.forEach(el=>revealObs.observe(el));
 
-/* ============================================
-   COUNTER ANIMATION
-============================================ */
-const counters=document.querySelectorAll('.stat-number');
-const counterObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const el=e.target;
-      const target=+el.dataset.count;
-      let current=0;
-      const step=target/60;
-      const update=()=>{
-        current+=step;
-        if(current<target){
-          el.textContent=Math.ceil(current);
-          requestAnimationFrame(update);
-        }else el.textContent=target;
-      };
-      update();
-      counterObs.unobserve(el);
-    }
-  });
-},{threshold:0.5});
-counters.forEach(c=>counterObs.observe(c));
+document.querySelectorAll('.page.active .reveal').forEach(el=>revealObs.observe(el));
 
 /* ============================================
    MUSIC PLAYER
@@ -1713,7 +1532,7 @@ const songs=[
   {title:'Liberian Dream',duration:'4:10',durationSec:250},
   {title:'Accra Vibes',duration:'3:30',durationSec:210}
 ];
-let currentSong=0,isPlaying=false,progress=0;
+let currentSong=0,isPlaying=false;
 
 function formatTime(sec){
   const m=Math.floor(sec/60);
@@ -1723,7 +1542,6 @@ function formatTime(sec){
 function updatePlayer(){
   document.getElementById('songTitle').textContent=songs[currentSong].title;
   durationEl.textContent=songs[currentSong].duration;
-  progress=0;
   progressFill.style.width='0%';
   currentTimeEl.textContent='0:00';
 }
@@ -1748,7 +1566,6 @@ progressBar.addEventListener('click',e=>{
   const sec=Math.floor(songs[currentSong].durationSec*pct);
   currentTimeEl.textContent=formatTime(sec);
 });
-// Simulate progress
 setInterval(()=>{
   if(!isPlaying) return;
   let current=parseFloat(progressFill.style.width)||0;
@@ -1815,7 +1632,7 @@ document.getElementById('backTop').addEventListener('click',()=>{
 ============================================ */
 window.addEventListener('scroll',()=>{
   const hero=document.querySelector('.hero-bg');
-  if(hero){
+  if(hero && document.getElementById('home').classList.contains('active')){
     const scrolled=window.scrollY;
     hero.style.transform=`translateY(${scrolled*0.3}px)`;
   }
