@@ -11,139 +11,787 @@
 <meta property="og:type" content="website" />
 <title>FlackoB — Official Website | Liberian Recording Artist</title>
 
+<!-- ✅ Inline SVG Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23050505'/%3E%3Ctext x='50' y='68' font-family='Bebas Neue,Arial,sans-serif' font-size='60' font-weight='bold' text-anchor='middle' fill='%23D4AF37'%3EF%3C/text%3E%3C/svg%3E">
 <link rel="icon" href="data:,">
+
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+/* ============================================
+   CSS VARIABLES
+============================================ */
 :root{
-  --bg-primary:#050505;--bg-secondary:#111111;--bg-tertiary:#0a0a0a;
-  --gold:#D4AF37;--gold-light:#f0d27a;--gold-dark:#a8861f;
-  --liberian-blue:#002868;--liberian-red:#BF0A30;--white:#FFFFFF;
-  --light-grey:#BFBFBF;--muted:#8a8a8a;--glass:rgba(255,255,255,0.04);
-  --glass-border:rgba(255,255,255,0.08);--shadow-gold:0 0 40px rgba(212,175,55,0.25);
-  --shadow-soft:0 10px 40px rgba(0,0,0,0.5);--transition:cubic-bezier(.22,.61,.36,1);
+  --bg-primary:#050505;
+  --bg-secondary:#111111;
+  --bg-tertiary:#0a0a0a;
+  --gold:#D4AF37;
+  --gold-light:#f0d27a;
+  --gold-dark:#a8861f;
+  --liberian-blue:#002868;
+  --liberian-red:#BF0A30;
+  --white:#FFFFFF;
+  --light-grey:#BFBFBF;
+  --muted:#8a8a8a;
+  --glass:rgba(255,255,255,0.04);
+  --glass-border:rgba(255,255,255,0.08);
+  --shadow-gold:0 0 40px rgba(212,175,55,0.25);
+  --shadow-soft:0 10px 40px rgba(0,0,0,0.5);
+  --transition:cubic-bezier(.22,.61,.36,1);
 }
+
+/* ============================================
+   RESET & BASE
+============================================ */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;background:var(--bg-primary);color:var(--white);line-height:1.6;overflow-x:hidden;cursor:default}
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg-primary);
+  color:var(--white);
+  line-height:1.6;
+  overflow-x:hidden;
+  cursor:default;
+}
 h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;line-height:1.1;font-weight:400}
 a{color:inherit;text-decoration:none;transition:all .3s var(--transition)}
 img{max-width:100%;display:block}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 ::selection{background:var(--gold);color:#000}
+
 ::-webkit-scrollbar{width:8px}
 ::-webkit-scrollbar-track{background:var(--bg-primary)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-dark));border-radius:10px}
 
-.page{display:none;animation:pageFade .6s var(--transition);min-height:100vh}
+/* ============================================
+   PAGE-BASED NAVIGATION (Independent Pages)
+============================================ */
+.page{
+  display:none;
+  animation:pageFade .6s var(--transition);
+  min-height:100vh;
+}
 .page.active{display:block}
 @keyframes pageFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-#loader{position:fixed;inset:0;background:var(--bg-primary);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .8s ease,visibility .8s ease}
+/* ============================================
+   LOADING SCREEN
+============================================ */
+#loader{
+  position:fixed;inset:0;background:var(--bg-primary);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;transition:opacity .8s ease,visibility .8s ease;
+}
 #loader.hide{opacity:0;visibility:hidden}
 .loader-content{text-align:center}
-.loader-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);color:var(--gold);letter-spacing:8px;animation:pulse 1.5s ease-in-out infinite}
-.loader-bar{width:200px;height:2px;background:rgba(255,255,255,.1);margin:20px auto;overflow:hidden;border-radius:2px}
-.loader-bar::after{content:'';display:block;width:40%;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));animation:loadBar 1.2s ease-in-out infinite}
+.loader-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,8vw,6rem);
+  color:var(--gold);
+  letter-spacing:8px;
+  animation:pulse 1.5s ease-in-out infinite;
+}
+.loader-bar{
+  width:200px;height:2px;background:rgba(255,255,255,.1);
+  margin:20px auto;overflow:hidden;border-radius:2px;
+}
+.loader-bar::after{
+  content:'';display:block;width:40%;height:100%;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  animation:loadBar 1.2s ease-in-out infinite;
+}
 @keyframes loadBar{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
 @keyframes pulse{0%,100%{opacity:1;text-shadow:0 0 20px rgba(212,175,55,.5)}50%{opacity:.6;text-shadow:0 0 40px rgba(212,175,55,.9)}}
 
-.mouse-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,0.08) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s ease}
+/* ============================================
+   MOUSE GLOW
+============================================ */
+.mouse-glow{
+  position:fixed;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,0.08) 0%,transparent 70%);
+  pointer-events:none;z-index:1;
+  transform:translate(-50%,-50%);
+  transition:opacity .3s ease;
+}
 
-.navbar{position:fixed;top:0;left:0;width:100%;padding:20px 5%;z-index:1000;display:flex;align-items:center;justify-content:space-between;transition:all .4s var(--transition)}
-.navbar.scrolled{padding:14px 5%;background:rgba(5,5,5,0.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:4px;color:var(--gold);position:relative;cursor:pointer}
+/* ============================================
+   NAVIGATION
+============================================ */
+.navbar{
+  position:fixed;top:0;left:0;width:100%;
+  padding:20px 5%;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s var(--transition);
+}
+.navbar.scrolled{
+  padding:14px 5%;
+  background:rgba(5,5,5,0.75);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--glass-border);
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:4px;
+  color:var(--gold);
+  position:relative;
+  cursor:pointer;
+}
 .nav-logo span{color:var(--white)}
-.nav-logo::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.nav-logo::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
 .nav-menu{display:flex;gap:35px;list-style:none;align-items:center}
-.nav-menu a{font-size:.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;position:relative;padding:5px 0;color:var(--light-grey);cursor:pointer}
-.nav-menu a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:var(--gold);transition:all .3s var(--transition);transform:translateX(-50%)}
+.nav-menu a{
+  font-size:.85rem;font-weight:500;letter-spacing:2px;
+  text-transform:uppercase;position:relative;padding:5px 0;
+  color:var(--light-grey);cursor:pointer;
+}
+.nav-menu a::after{
+  content:'';position:absolute;bottom:0;left:50%;
+  width:0;height:2px;background:var(--gold);
+  transition:all .3s var(--transition);transform:translateX(-50%);
+}
 .nav-menu a:hover,.nav-menu a.active{color:var(--gold)}
 .nav-menu a:hover::after,.nav-menu a.active::after{width:100%}
 .nav-toggle{display:none;font-size:1.5rem;color:var(--gold);z-index:1001}
+
 @media (max-width:968px){
   .nav-toggle{display:block}
-  .nav-menu{position:fixed;top:0;right:-100%;width:80%;max-width:380px;height:100vh;background:rgba(10,10,10,0.98);backdrop-filter:blur(30px);flex-direction:column;justify-content:center;align-items:center;gap:30px;transition:right .5s var(--transition);border-left:1px solid var(--glass-border)}
+  .nav-menu{
+    position:fixed;top:0;right:-100%;width:80%;max-width:380px;height:100vh;
+    background:rgba(10,10,10,0.98);backdrop-filter:blur(30px);
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:30px;transition:right .5s var(--transition);
+    border-left:1px solid var(--glass-border);
+  }
   .nav-menu.open{right:0}
   .nav-menu a{font-size:1.2rem}
 }
 
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg, rgba(5,5,5,0.75) 0%, rgba(0,40,104,0.5) 50%, rgba(5,5,5,0.85) 100%), url('https://i.ibb.co/q31XkB2d/c10d3f3d-ab8d-4791-be43-2b8d51abbc83-1.jpg') center/cover no-repeat;z-index:-2}
-.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,transparent 0%,var(--bg-primary) 85%)}
+/* ============================================
+   HERO SECTION — PERFECTLY CENTERED
+============================================ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  /* Optimized to show the entire picture beautifully while keeping text readable */
+  background:
+    linear-gradient(135deg, rgba(5,5,5,0.75) 0%, rgba(0,40,104,0.5) 50%, rgba(5,5,5,0.85) 100%),
+    url('https://i.ibb.co/q31XkB2d/c10d3f3d-ab8d-4791-be43-2b8d51abbc83-1.jpg') center/cover no-repeat;
+  z-index:-2;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at center,transparent 0%,var(--bg-primary) 85%);
+}
 #particles-canvas{position:absolute;inset:0;z-index:-1}
-.hero-content{position:relative;z-index:2;max-width:1200px;width:100%;padding:0 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto}
-.hero-tag{display:inline-block;padding:8px 20px;border:1px solid var(--gold);border-radius:30px;color:var(--gold);font-size:.75rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:30px;background:rgba(212,175,55,0.05);animation:fadeUp 1s .2s both}
-.hero h1{font-size:clamp(4rem,15vw,12rem);color:var(--white);letter-spacing:6px;margin-bottom:20px;text-shadow:0 0 60px rgba(212,175,55,0.3);animation:fadeUp 1s .4s both}
+
+.hero-content{
+  position:relative;z-index:2;
+  max-width:1200px;width:100%;
+  padding:0 20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto;
+}
+.hero-tag{
+  display:inline-block;padding:8px 20px;
+  border:1px solid var(--gold);border-radius:30px;
+  color:var(--gold);font-size:.75rem;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:30px;
+  background:rgba(212,175,55,0.05);
+  animation:fadeUp 1s .2s both;
+}
+.hero h1{
+  font-size:clamp(4rem,15vw,12rem);
+  color:var(--white);letter-spacing:6px;
+  margin-bottom:20px;
+  text-shadow:0 0 60px rgba(212,175,55,0.3);
+  animation:fadeUp 1s .4s both;
+}
 .hero h1 .gold{color:var(--gold)}
-.hero-subtitle{font-size:clamp(1rem,2vw,1.4rem);color:var(--light-grey);letter-spacing:4px;text-transform:uppercase;margin-bottom:25px;animation:fadeUp 1s .6s both;font-weight:500;min-height:2rem}
-.hero-quote{font-style:italic;color:var(--muted);max-width:600px;margin:0 auto 50px;font-size:1rem;animation:fadeUp 1s .8s both}
-.hero-buttons{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s 1s both}
-.btn{padding:16px 36px;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:50px;transition:all .4s var(--transition);display:inline-flex;align-items:center;gap:10px;position:relative;overflow:hidden;cursor:pointer}
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;box-shadow:0 10px 30px rgba(212,175,55,0.3)}
+.hero-subtitle{
+  font-size:clamp(1rem,2vw,1.4rem);
+  color:var(--light-grey);letter-spacing:4px;
+  text-transform:uppercase;margin-bottom:25px;
+  animation:fadeUp 1s .6s both;
+  font-weight:500;
+  min-height: 2rem;
+}
+.hero-quote{
+  font-style:italic;color:var(--muted);
+  max-width:600px;margin:0 auto 50px;
+  font-size:1rem;
+  animation:fadeUp 1s .8s both;
+}
+.hero-buttons{
+  display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 1s 1s both;
+}
+.btn{
+  padding:16px 36px;font-size:.85rem;letter-spacing:2px;
+  text-transform:uppercase;font-weight:600;
+  border-radius:50px;transition:all .4s var(--transition);
+  display:inline-flex;align-items:center;gap:10px;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#000;box-shadow:0 10px 30px rgba(212,175,55,0.3);
+}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(212,175,55,0.5)}
 .btn-outline{border:1px solid var(--white);color:var(--white);background:rgba(255,255,255,0.03)}
 .btn-outline:hover{background:var(--white);color:#000;transform:translateY(-3px)}
 .btn-ghost{border:1px solid var(--gold);color:var(--gold)}
 .btn-ghost:hover{background:var(--gold);color:#000;transform:translateY(-3px);box-shadow:var(--shadow-gold)}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
+/* ============================================
+   SECTION COMMON
+============================================ */
 section{padding:120px 5%;position:relative}
 .section-header{text-align:center;margin-bottom:80px}
-.section-tag{display:inline-block;color:var(--gold);font-size:.8rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:15px}
-.section-title{font-size:clamp(2.5rem,6vw,5rem);color:var(--white);margin-bottom:20px}
+.section-tag{
+  display:inline-block;color:var(--gold);
+  font-size:.8rem;letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:15px;
+}
+.section-title{
+  font-size:clamp(2.5rem,6vw,5rem);
+  color:var(--white);margin-bottom:20px;
+}
 .section-title .gold{color:var(--gold)}
-.section-desc{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
+.section-desc{
+  color:var(--muted);max-width:600px;margin:0 auto;
+  font-size:1rem;
+}
 
-.coming-soon{max-width:700px;margin:0 auto;padding:80px 40px;text-align:center;background:var(--glass);border:1px solid var(--glass-border);border-radius:25px;position:relative;overflow:hidden}
-.coming-soon::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(212,175,55,.08) 0%,transparent 70%)}
-.coming-soon-icon{width:90px;height:90px;margin:0 auto 25px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;color:#000;font-size:2rem;box-shadow:0 15px 40px rgba(212,175,55,.3);animation:float 3s ease-in-out infinite}
-.coming-soon h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--white);letter-spacing:3px;margin-bottom:15px;position:relative}
-.coming-soon p{color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto;position:relative}
+/* Coming Soon Card */
+.coming-soon{
+  max-width:700px;margin:0 auto;
+  padding:80px 40px;text-align:center;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:25px;
+  position:relative;overflow:hidden;
+}
+.coming-soon::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(212,175,55,.08) 0%,transparent 70%);
+}
+.coming-soon-icon{
+  width:90px;height:90px;margin:0 auto 25px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  display:flex;align-items:center;justify-content:center;
+  color:#000;font-size:2rem;
+  box-shadow:0 15px 40px rgba(212,175,55,.3);
+  animation:float 3s ease-in-out infinite;
+}
+.coming-soon h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  color:var(--white);letter-spacing:3px;
+  margin-bottom:15px;position:relative;
+}
+.coming-soon p{
+  color:var(--muted);font-size:1rem;
+  max-width:500px;margin:0 auto;
+  position:relative;
+}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
+/* ============================================
+   ABOUT SECTION (3D Motion)
+============================================ */
 .about{background:var(--bg-secondary)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1300px;margin:0 auto}
-.about-image{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;animation:moveRightLeft3D 6s ease-in-out infinite;transform-style:preserve-3d}
-@keyframes moveRightLeft3D{0%{transform:translateX(40px) perspective(1000px) rotateY(-8deg) scale(1);box-shadow:-20px 20px 40px rgba(0,0,0,0.6)}50%{transform:translateX(-40px) perspective(1000px) rotateY(8deg) scale(1.02);box-shadow:20px 20px 40px rgba(212,175,55,0.25)}100%{transform:translateX(40px) perspective(1000px) rotateY(-8deg) scale(1);box-shadow:-20px 20px 40px rgba(0,0,0,0.6)}}
-.about-image img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--transition)}
-.about-image::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6) 100%);z-index:1}
-.about-image::after{content:'';position:absolute;top:-20px;left:-20px;width:100%;height:100%;border:2px solid var(--gold);border-radius:20px;z-index:-1;animation:moveRightLeft3D 6s ease-in-out infinite}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;max-width:1300px;margin:0 auto;
+}
+.about-image{
+  position:relative;border-radius:20px;overflow:hidden;
+  aspect-ratio:3/4;
+  /* 3D Moving Right to Left Animation */
+  animation: moveRightLeft3D 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+@keyframes moveRightLeft3D {
+  0% { transform: translateX(40px) perspective(1000px) rotateY(-8deg) scale(1); box-shadow: -20px 20px 40px rgba(0,0,0,0.6); }
+  50% { transform: translateX(-40px) perspective(1000px) rotateY(8deg) scale(1.02); box-shadow: 20px 20px 40px rgba(212,175,55,0.25); }
+  100% { transform: translateX(40px) perspective(1000px) rotateY(-8deg) scale(1); box-shadow: -20px 20px 40px rgba(0,0,0,0.6); }
+}
+.about-image img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s var(--transition);
+}
+.about-image::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6) 100%);
+  z-index:1;
+}
+.about-image::after{
+  content:'';position:absolute;top:-20px;left:-20px;
+  width:100%;height:100%;border:2px solid var(--gold);
+  border-radius:20px;z-index:-1;
+  animation: moveRightLeft3D 6s ease-in-out infinite; /* Sync border with image */
+}
 .about-content .section-tag{text-align:left}
 .about-content h2{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:25px}
-.about-content p{color:var(--light-grey);margin-bottom:20px;font-size:1rem;line-height:1.8}
-.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:25px;margin-top:40px}
-.stat-card{padding:25px;background:var(--glass);border:1px solid var(--glass-border);border-radius:15px;text-align:center;transition:all .4s var(--transition)}
+.about-content p{
+  color:var(--light-grey);margin-bottom:20px;
+  font-size:1rem;line-height:1.8;
+}
+.about-stats{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:25px;margin-top:40px;
+}
+.stat-card{
+  padding:25px;background:var(--glass);
+  border:1px solid var(--glass-border);border-radius:15px;
+  text-align:center;transition:all .4s var(--transition);
+}
 .stat-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:var(--shadow-gold)}
-.stat-number{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--gold);display:block;line-height:1}
-.stat-label{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--light-grey);margin-top:8px}
+.stat-number{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3rem;color:var(--gold);
+  display:block;line-height:1;
+}
+.stat-label{
+  font-size:.75rem;letter-spacing:2px;
+  text-transform:uppercase;color:var(--light-grey);
+  margin-top:8px;
+}
 @media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:50px}}
 
-.music-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;max-width:1300px;margin:0 auto}
-.music-card{background:var(--bg-secondary);border-radius:20px;overflow:hidden;border:1px solid var(--glass-border);transition:all .5s var(--transition);position:relative}
+/* ============================================
+   MUSIC SECTION
+============================================ */
+.music-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;max-width:1300px;margin:0 auto;
+}
+.music-card{
+  background:var(--bg-secondary);border-radius:20px;
+  overflow:hidden;border:1px solid var(--glass-border);
+  transition:all .5s var(--transition);
+  position:relative;
+}
 .music-card:hover{transform:translateY(-10px);border-color:var(--gold);box-shadow:0 20px 50px rgba(212,175,55,0.15)}
-.music-cover{position:relative;aspect-ratio:1;overflow:hidden;background:linear-gradient(135deg,var(--liberian-blue),#000)}
+.music-cover{
+  position:relative;aspect-ratio:1;overflow:hidden;
+  background:linear-gradient(135deg,var(--liberian-blue),#000);
+}
 .music-cover img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--transition)}
 .music-card:hover .music-cover img{transform:scale(1.1)}
-.music-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.8) 100%)}
-.music-year{position:absolute;top:15px;right:15px;padding:5px 12px;background:rgba(0,0,0,.6);border:1px solid var(--gold);border-radius:20px;color:var(--gold);font-size:.7rem;letter-spacing:2px;z-index:2}
+.music-cover::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.8) 100%);
+}
+.music-year{
+  position:absolute;top:15px;right:15px;
+  padding:5px 12px;background:rgba(0,0,0,.6);
+  border:1px solid var(--gold);border-radius:20px;
+  color:var(--gold);font-size:.7rem;letter-spacing:2px;
+  z-index:2;
+}
 .music-info{padding:25px}
-.music-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);margin-bottom:5px;letter-spacing:1px}
-.music-genre{color:var(--muted);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.music-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.6rem;color:var(--white);
+  margin-bottom:5px;letter-spacing:1px;
+}
+.music-genre{
+  color:var(--muted);font-size:.8rem;
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:20px;
+}
 .music-links{display:flex;gap:10px;flex-wrap:wrap}
-.music-link{width:40px;height:40px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--light-grey);font-size:.9rem;transition:all .3s var(--transition)}
+.music-link{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--light-grey);font-size:.9rem;
+  transition:all .3s var(--transition);
+}
 .music-link:hover{background:var(--gold);color:#000;transform:translateY(-3px);box-shadow:0 5px 15px rgba(212,175,55,0.4)}
+
+/* ============================================
+   GALLERY (3D Touches)
+============================================ */
+.gallery{background:var(--bg-secondary)}
+.gallery-grid{
+  columns:3;column-gap:20px;max-width:1300px;margin:0 auto;
+}
+.gallery-item{
+  break-inside:avoid;margin-bottom:20px;
+  border-radius:15px;overflow:hidden;cursor:pointer;
+  position:relative;
+  transition: all 0.5s var(--transition);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+.gallery-item img{
+  width:100%;display:block;
+  transition:transform 0.6s var(--transition);
+}
+.gallery-item::after{
+  content:'\f00e';font-family:'Font Awesome 6 Free';font-weight:900;
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.6);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;opacity:0;transition:opacity .4s var(--transition);
+  z-index: 2;
+}
+.gallery-item:hover{
+  transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) scale(1.05) translateZ(20px);
+  box-shadow: 0 30px 60px rgba(212,175,55,0.35);
+  z-index: 10;
+  border: 1px solid var(--gold);
+}
+.gallery-item:hover img{
+  transform: scale(1.15);
+}
+.gallery-item:hover::after{opacity:1}
+
+@media (max-width:900px){.gallery-grid{columns:2}}
+@media (max-width:500px){.gallery-grid{columns:1}}
+
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.95);
+  display:none;align-items:center;justify-content:center;
+  z-index:2000;padding:20px;
+}
+.lightbox.active{display:flex;animation:fadeIn .3s ease}
+.lightbox img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 0 60px rgba(212,175,55,.2)}
+.lightbox-close{
+  position:absolute;top:30px;right:30px;
+  width:50px;height:50px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--gold);font-size:1.3rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s ease;
+}
+.lightbox-close:hover{background:var(--gold);color:#000;transform:rotate(90deg)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ============================================
+   BOOKING
+============================================ */
+.booking{
+  background:
+    linear-gradient(135deg,rgba(0,40,104,.2) 0%,rgba(5,5,5,.95) 50%,rgba(191,10,48,.15) 100%);
+}
+.booking-form{
+  max-width:800px;margin:0 auto;
+  background:rgba(20,20,20,0.5);
+  backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:25px;padding:50px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.form-group{margin-bottom:20px;position:relative}
+.form-group label{
+  display:block;color:var(--gold);
+  font-size:.75rem;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:10px;
+}
+.form-group input,.form-group textarea{
+  width:100%;padding:15px 20px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:12px;color:var(--white);
+  font-family:inherit;font-size:.95rem;
+  transition:all .3s var(--transition);
+}
+.form-group input:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--gold);
+  background:rgba(212,175,55,.05);
+  box-shadow:0 0 0 3px rgba(212,175,55,.1);
+}
+.form-group textarea{resize:vertical;min-height:120px}
+.booking-form .btn{width:100%;justify-content:center;margin-top:10px;padding:18px}
+@media (max-width:600px){.form-row{grid-template-columns:1fr}}
+
+/* ============================================
+   CONTACT (WHATSAPP)
+============================================ */
+.contact{background:var(--bg-secondary)}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;max-width:1200px;margin:0 auto;
+}
+.contact-card{
+  padding:40px 30px;text-align:center;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:20px;transition:all .4s var(--transition);
+  display:block;
+}
+.contact-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:var(--shadow-gold)}
+.contact-icon{
+  width:70px;height:70px;margin:0 auto 20px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.8rem;
+  box-shadow:0 10px 30px rgba(37,211,102,.3);
+}
+.contact-card h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;color:var(--white);
+  letter-spacing:2px;margin-bottom:10px;
+}
+.contact-card p{color:var(--light-grey);font-size:.9rem;line-height:1.7}
+.contact-card .whatsapp-number{
+  color:var(--gold);font-weight:600;
+  font-size:1rem;margin-top:10px;display:block;
+}
+
+/* ============================================
+   SOCIALS
+============================================ */
+.socials-section{
+  background:var(--bg-primary);
+  padding:100px 5%;
+}
+.socials-grid{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:20px;max-width:1100px;margin:0 auto;
+}
+.social-icon{
+  width:75px;height:75px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white);font-size:1.6rem;
+  transition:all .4s var(--transition);
+  position:relative;overflow:hidden;
+}
+.social-icon::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  opacity:0;transition:opacity .4s ease;
+}
+.social-icon i{position:relative;z-index:1;transition:transform .4s ease}
+.social-icon:hover{transform:translateY(-8px) scale(1.1);border-color:var(--gold);box-shadow:0 15px 40px rgba(212,175,55,.4)}
+.social-icon:hover::before{opacity:1}
+.social-icon:hover i{color:#000;transform:rotate(360deg)}
+.social-icon.tiktok:hover::before{background:linear-gradient(135deg,#ff0050,#00f2ea)}
+.social-icon.youtube:hover::before{background:#FF0000}
+.social-icon.spotify:hover::before{background:#1DB954}
+.social-icon.instagram:hover::before{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.social-icon.facebook:hover::before{background:#1877F2}
+.social-icon.apple:hover::before{background:linear-gradient(135deg,#fc3c44,#000)}
+.social-icon.x:hover::before{background:#000}
+
+/* ============================================
+   FOOTER
+============================================ */
+footer{
+  background:#000;padding:60px 5% 30px;
+  border-top:1px solid var(--glass-border);
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;max-width:1300px;margin:0 auto 40px;
+}
+.footer-brand h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.5rem;color:var(--gold);
+  letter-spacing:4px;margin-bottom:15px;
+}
+.footer-brand p{color:var(--muted);font-size:.9rem;max-width:300px}
+.footer-col h4{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.3rem;color:var(--white);
+  letter-spacing:2px;margin-bottom:20px;
+}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:var(--muted);font-size:.9rem;transition:color .3s;cursor:pointer}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{
+  max-width:1300px;margin:0 auto;
+  padding-top:30px;border-top:1px solid var(--glass-border);
+  text-align:center;color:var(--muted);font-size:.85rem;
+}
+.footer-bottom .heart{color:var(--liberian-red);animation:pulse 1.5s infinite}
+.footer-powered{
+  margin-top:15px;color:var(--gold);
+  font-size:.85rem;letter-spacing:1px;
+}
+@media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;gap:30px}}
+@media (max-width:500px){.footer-grid{grid-template-columns:1fr}}
+
+/* ============================================
+   BACK TO TOP
+============================================ */
+.back-top{
+  position:fixed;bottom:30px;right:30px;
+  width:50px;height:50px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#000;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;z-index:998;
+  opacity:0;visibility:hidden;transform:translateY(20px);
+  transition:all .4s var(--transition);
+  box-shadow:0 10px 30px rgba(212,175,55,.4);
+}
+.back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+.back-top:hover{transform:translateY(-5px) scale(1.1)}
+
+/* ============================================
+   SHARE BUTTON (FLOATING)
+============================================ */
+.share-btn{
+  position:fixed;bottom:95px;right:30px;
+  width:50px;height:50px;border-radius:50%;
+  background:linear-gradient(135deg,var(--liberian-blue),#001a44);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;cursor:pointer;z-index:998;
+  box-shadow:0 10px 30px rgba(0,40,104,.5);
+  transition:all .4s var(--transition);
+  border:1px solid rgba(212,175,55,.3);
+}
+.share-btn:hover{
+  transform:translateY(-5px) scale(1.1);
+  box-shadow:0 15px 40px rgba(0,40,104,.7);
+  border-color:var(--gold);
+}
+.share-btn i{transition:transform .4s var(--transition)}
+.share-btn:hover i{transform:rotate(15deg)}
+
+/* Share Modal */
+.share-modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+  z-index:2500;padding:20px;
+}
+.share-modal.active{display:flex;animation:fadeIn .3s ease}
+.share-modal-content{
+  background:rgba(20,20,20,0.95);
+  border:1px solid var(--glass-border);
+  border-radius:25px;
+  padding:40px;
+  max-width:500px;width:100%;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  position:relative;
+}
+.share-modal-close{
+  position:absolute;top:15px;right:15px;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--gold);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s ease;
+}
+.share-modal-close:hover{background:var(--gold);color:#000;transform:rotate(90deg)}
+.share-modal h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;color:var(--white);
+  letter-spacing:2px;margin-bottom:10px;
+}
+.share-modal p{
+  color:var(--muted);font-size:.9rem;
+  margin-bottom:30px;
+}
+.share-options{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.share-option{
+  padding:20px 10px;border-radius:15px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  cursor:pointer;transition:all .3s var(--transition);
+  color:var(--white);font-size:.75rem;letter-spacing:1px;
+  text-transform:uppercase;
+}
+.share-option i{font-size:1.5rem;transition:transform .3s ease}
+.share-option:hover{transform:translateY(-5px)}
+.share-option:hover i{transform:scale(1.2)}
+.share-option.whatsapp{color:#25D366}
+.share-option.whatsapp:hover{background:rgba(37,211,102,.1);border-color:#25D366}
+.share-option.facebook{color:#1877F2}
+.share-option.facebook:hover{background:rgba(24,119,242,.1);border-color:#1877F2}
+.share-option.twitter{color:#fff}
+.share-option.twitter:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.share-option.telegram{color:#0088cc}
+.share-option.telegram:hover{background:rgba(0,136,204,.1);border-color:#0088cc}
+.share-option.copy{color:var(--gold)}
+.share-option.copy:hover{background:rgba(212,175,55,.1);border-color:var(--gold)}
+.share-option.native{color:#ff0050}
+.share-option.native:hover{background:rgba(255,0,80,.1);border-color:#ff0050}
+
+.copy-toast{
+  position:fixed;bottom:160px;right:30px;
+  padding:12px 24px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:#000;border-radius:30px;
+  font-weight:600;font-size:.85rem;letter-spacing:1px;
+  box-shadow:0 10px 30px rgba(212,175,55,.4);
+  z-index:3000;
+  opacity:0;visibility:hidden;transform:translateY(20px);
+  transition:all .4s var(--transition);
+}
+.copy-toast.show{opacity:1;visibility:visible;transform:translateY(0)}
+
+@media (max-width:500px){
+  .share-options{grid-template-columns:repeat(2,1fr)}
+  .share-modal-content{padding:30px 20px}
+}
+
+/* ============================================
+   SCROLL REVEAL
+============================================ */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s var(--transition)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-left{transform:translateX(-40px)}
+.reveal-left.active{transform:translateX(0)}
+.reveal-right{transform:translateX(40px)}
+.reveal-right.active{transform:translateX(0)}
+.reveal-zoom{transform:scale(.8)}
+.reveal-zoom.active{transform:scale(1)}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.float{animation:float 3s ease-in-out infinite}
+
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--gold);outline-offset:3px;
+}
 </style>
 </head>
 <body>
 
-<div id="loader"><div class="loader-content"><div class="loader-logo">FLACKOB</div><div class="loader-bar"></div></div></div>
+<!-- ============================================
+     LOADING SCREEN
+============================================ -->
+<div id="loader">
+  <div class="loader-content">
+    <div class="loader-logo">FLACKOB</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+<!-- Mouse Glow -->
 <div class="mouse-glow" id="mouseGlow"></div>
 
+<!-- ============================================
+     NAVIGATION
+============================================ -->
 <nav class="navbar" id="navbar">
   <a class="nav-logo" data-page="home">FLACKO<span>B</span></a>
   <ul class="nav-menu" id="navMenu">
@@ -159,6 +807,9 @@ section{padding:120px 5%;position:relative}
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
 </nav>
 
+<!-- ============================================
+     PAGE: HOME (HERO) — PERFECTLY CENTERED
+============================================ -->
 <section class="hero page active" id="home">
   <div class="hero-bg"></div>
   <canvas id="particles-canvas"></canvas>
@@ -175,6 +826,9 @@ section{padding:120px 5%;position:relative}
   </div>
 </section>
 
+<!-- ============================================
+     PAGE: ABOUT
+============================================ -->
 <section class="about page" id="about">
   <div class="about-grid">
     <div class="about-image reveal reveal-left">
@@ -183,18 +837,37 @@ section{padding:120px 5%;position:relative}
     <div class="about-content reveal reveal-right">
       <span class="section-tag">About The Artist</span>
       <h2>The Sound of a <span style="color:var(--gold)">New Generation</span></h2>
-      <p><strong style="color:var(--gold)">FlackoB</strong> is a Liberian recording artist, songwriter, performer and entertainer currently based in Ghana — one of Africa's most vibrant music capitals. Born and raised in Liberia, he carries the heartbeat of West Africa in every verse, blending the raw energy of his homeland with the polished pulse of contemporary African sound.</p>
-      <p>His music fuses <strong>Afrobeat, Afropop, Hip-Hop, Drill, Trap</strong> and modern African rhythms into a signature style that speaks to a generation hungry for authenticity. From Monrovia to Accra, FlackoB is building a bridge between cultures — crafting anthems that move dancefloors, touch hearts and put Liberia firmly on the global music map.</p>
+      <p>
+        <strong style="color:var(--gold)">FlackoB</strong> is a Liberian recording artist, songwriter, performer and entertainer currently based in Ghana — one of Africa's most vibrant music capitals. Born and raised in Liberia, he carries the heartbeat of West Africa in every verse, blending the raw energy of his homeland with the polished pulse of contemporary African sound.
+      </p>
+      <p>
+        His music fuses <strong>Afrobeat, Afropop, Hip-Hop, Drill, Trap</strong> and modern African rhythms into a signature style that speaks to a generation hungry for authenticity. From Monrovia to Accra, FlackoB is building a bridge between cultures — crafting anthems that move dancefloors, touch hearts and put Liberia firmly on the global music map.
+      </p>
       <div class="about-stats">
-        <div class="stat-card"><span class="stat-number" data-count="10">0</span><div class="stat-label">Songs Released</div></div>
-        <div class="stat-card"><span class="stat-number" data-count="10">0</span><div class="stat-label">Shows Performed</div></div>
-        <div class="stat-card"><span class="stat-number" data-count="400">0</span><div class="stat-label">K+ Followers</div></div>
-        <div class="stat-card"><span class="stat-number" data-count="8">0</span><div class="stat-label">Years Active</div></div>
+        <div class="stat-card">
+          <span class="stat-number" data-count="10">0</span>
+          <div class="stat-label">Songs Released</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-count="10">0</span>
+          <div class="stat-label">Shows Performed</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-count="400">0</span>
+          <div class="stat-label">K+ Followers</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-count="8">0</span>
+          <div class="stat-label">Years Active</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================
+     PAGE: MUSIC
+============================================ -->
 <section class="page" id="music">
   <div class="section-header reveal">
     <span class="section-tag">Discography</span>
@@ -203,9 +876,13 @@ section{padding:120px 5%;position:relative}
   </div>
   <div class="music-grid">
     <div class="music-card reveal">
-      <div class="music-cover"><img src="images/cover1.jpg" alt="Monrovia Nights cover" onerror="this.style.display='none'"><span class="music-year">2026</span></div>
+      <div class="music-cover">
+        <img src="images/cover1.jpg" alt="Monrovia Nights cover" onerror="this.style.display='none'">
+        <span class="music-year">2026</span>
+      </div>
       <div class="music-info">
-        <h3 class="music-title">Monrovia Nights</h3><p class="music-genre">Afrobeat • Afropop</p>
+        <h3 class="music-title">Monrovia Nights</h3>
+        <p class="music-genre">Afrobeat • Afropop</p>
         <div class="music-links">
           <a href="#" class="music-link" title="Spotify"><i class="fab fa-spotify"></i></a>
           <a href="#" class="music-link" title="Apple Music"><i class="fab fa-apple"></i></a>
@@ -216,9 +893,13 @@ section{padding:120px 5%;position:relative}
       </div>
     </div>
     <div class="music-card reveal">
-      <div class="music-cover"><img src="images/cover2.jpg" alt="Gold Coast cover" onerror="this.style.display='none'"><span class="music-year">2025</span></div>
+      <div class="music-cover">
+        <img src="images/cover2.jpg" alt="Gold Coast cover" onerror="this.style.display='none'">
+        <span class="music-year">2025</span>
+      </div>
       <div class="music-info">
-        <h3 class="music-title">Gold Coast</h3><p class="music-genre">Afropop • Dancehall</p>
+        <h3 class="music-title">Gold Coast</h3>
+        <p class="music-genre">Afropop • Dancehall</p>
         <div class="music-links">
           <a href="#" class="music-link" title="Spotify"><i class="fab fa-spotify"></i></a>
           <a href="#" class="music-link" title="Apple Music"><i class="fab fa-apple"></i></a>
@@ -229,9 +910,13 @@ section{padding:120px 5%;position:relative}
       </div>
     </div>
     <div class="music-card reveal">
-      <div class="music-cover"><img src="images/cover3.jpg" alt="Liberian Dream cover" onerror="this.style.display='none'"><span class="music-year">2025</span></div>
+      <div class="music-cover">
+        <img src="images/cover3.jpg" alt="Liberian Dream cover" onerror="this.style.display='none'">
+        <span class="music-year">2025</span>
+      </div>
       <div class="music-info">
-        <h3 class="music-title">Liberian Dream</h3><p class="music-genre">Hip-Hop • Drill</p>
+        <h3 class="music-title">Liberian Dream</h3>
+        <p class="music-genre">Hip-Hop • Drill</p>
         <div class="music-links">
           <a href="#" class="music-link" title="Spotify"><i class="fab fa-spotify"></i></a>
           <a href="#" class="music-link" title="Apple Music"><i class="fab fa-apple"></i></a>
@@ -242,9 +927,13 @@ section{padding:120px 5%;position:relative}
       </div>
     </div>
     <div class="music-card reveal">
-      <div class="music-cover"><img src="images/cover4.jpg" alt="Accra Vibes cover" onerror="this.style.display='none'"><span class="music-year">2024</span></div>
+      <div class="music-cover">
+        <img src="images/cover4.jpg" alt="Accra Vibes cover" onerror="this.style.display='none'">
+        <span class="music-year">2024</span>
+      </div>
       <div class="music-info">
-        <h3 class="music-title">Accra Vibes</h3><p class="music-genre">Afrobeat • Highlife</p>
+        <h3 class="music-title">Accra Vibes</h3>
+        <p class="music-genre">Afrobeat • Highlife</p>
         <div class="music-links">
           <a href="#" class="music-link" title="Spotify"><i class="fab fa-spotify"></i></a>
           <a href="#" class="music-link" title="Apple Music"><i class="fab fa-apple"></i></a>
@@ -255,8 +944,26 @@ section{padding:120px 5%;position:relative}
       </div>
     </div>
   </div>
-   <!-- ============================================
-     PAGE: GALLERY (Like & Love Only + Counters)
+</section>
+
+<!-- ============================================
+     PAGE: VIDEOS
+============================================ -->
+<section class="page" id="videos">
+  <div class="section-header reveal">
+    <span class="section-tag">Visuals</span>
+    <h2 class="section-title">Official <span class="gold">Videos</span></h2>
+    <p class="section-desc">Cinematic visuals that bring FlackoB's music to life.</p>
+  </div>
+  <div class="coming-soon reveal-zoom">
+    <div class="coming-soon-icon"><i class="fas fa-film"></i></div>
+    <h3>Coming Soon</h3>
+    <p>New music videos, visualizers and behind-the-scenes content are on the way. Stay tuned for exclusive visuals dropping soon.</p>
+  </div>
+</section>
+
+<!-- ============================================
+     PAGE: GALLERY
 ============================================ -->
 <section class="gallery page" id="gallery">
   <div class="section-header reveal">
@@ -265,124 +972,29 @@ section{padding:120px 5%;position:relative}
     <p class="section-desc">Behind the scenes, on stage, and everything in between.</p>
   </div>
   <div class="gallery-grid">
-    <!-- Gallery Item 1 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/3yNyYT4M/4be2245f-4379-4c9c-a3db-815c91a5689f.jpg" alt="Gallery 1">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 2 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/WNJ0KrP6/8ccbe4da-bfe7-4bff-8ed7-602af84d5b13.jpg" alt="Gallery 2">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 3 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/qLh7rt9c/8f79bcdd-23ca-4f22-a158-491036da78ba.jpg" alt="Gallery 3">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 4 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/GfWJNmHW/33a4ca41-2750-48a4-854c-864380613000.jpg" alt="Gallery 4">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 5 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/35KcKc8C/388bbafa-d5cc-43d1-bde0-93facc86f720.jpg" alt="Gallery 5">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 6 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/1fzQknbL/3499c929-d922-4fe0-94f4-982f94f080bf.jpg" alt="Gallery 6">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 7 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/XxGDn0h2/32337406-dcab-48d8-9e4a-461a506c94cb-1.jpg" alt="Gallery 7">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 8 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/99jrwmK2/ac111f61-a88c-4566-9a22-2f7d635da7e3.jpg" alt="Gallery 8">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 9 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/kVN69CNq/ba15c622-2ed8-435f-aea0-963ac2bc6c52.jpg" alt="Gallery 9">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 10 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/hRXWDm3r/c10d3f3d-ab8d-4791-be43-2b8d51abbc83.jpg" alt="Gallery 10">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
-    <!-- Gallery Item 11 -->
-    <div class="gallery-item reveal">
-      <img src="https://i.ibb.co/YFPMsYJ0/ca9867c3-b59b-4e01-a711-73a61b61264b.jpg" alt="Gallery 11">
-      <div class="gallery-overlay">
-        <div class="gallery-engagement">
-          <button class="engage-btn love-btn" data-count="0"><i class="fas fa-heart"></i> <span class="count">0</span></button>
-          <button class="engage-btn like-btn" data-count="0"><i class="fas fa-thumbs-up"></i> <span class="count">0</span></button>
-        </div>
-      </div>
-    </div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/3yNyYT4M/4be2245f-4379-4c9c-a3db-815c91a5689f.jpg" alt="Gallery 1"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/WNJ0KrP6/8ccbe4da-bfe7-4bff-8ed7-602af84d5b13.jpg" alt="Gallery 2"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/qLh7rt9c/8f79bcdd-23ca-4f22-a158-491036da78ba.jpg" alt="Gallery 3"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/GfWJNmHW/33a4ca41-2750-48a4-854c-864380613000.jpg" alt="Gallery 4"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/35KcKc8C/388bbafa-d5cc-43d1-bde0-93facc86f720.jpg" alt="Gallery 5"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/1fzQknbL/3499c929-d922-4fe0-94f4-982f94f080bf.jpg" alt="Gallery 6"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/XxGDn0h2/32337406-dcab-48d8-9e4a-461a506c94cb-1.jpg" alt="Gallery 7"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/99jrwmK2/ac111f61-a88c-4566-9a22-2f7d635da7e3.jpg" alt="Gallery 8"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/kVN69CNq/ba15c622-2ed8-435f-aea0-963ac2bc6c52.jpg" alt="Gallery 9"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/hRXWDm3r/c10d3f3d-ab8d-4791-be43-2b8d51abbc83.jpg" alt="Gallery 10"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/YFPMsYJ0/ca9867c3-b59b-4e01-a711-73a61b61264b.jpg" alt="Gallery 11"></div>
   </div>
 </section>
 
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
   <img src="" alt="Gallery image" id="lightboxImg">
 </div>
 
+<!-- ============================================
+     PAGE: EVENTS
+============================================ -->
 <section class="page" id="events">
   <div class="section-header reveal">
     <span class="section-tag">Tour Dates</span>
@@ -396,6 +1008,9 @@ section{padding:120px 5%;position:relative}
   </div>
 </section>
 
+<!-- ============================================
+     PAGE: BOOKING
+============================================ -->
 <section class="booking page" id="booking">
   <div class="section-header reveal">
     <span class="section-tag">Private & Corporate</span>
@@ -404,22 +1019,46 @@ section{padding:120px 5%;position:relative}
   </div>
   <form class="booking-form reveal" id="bookingForm">
     <div class="form-row">
-      <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" required placeholder="Your full name"></div>
-      <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" required placeholder="you@email.com"></div>
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required placeholder="you@email.com">
+      </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="+233 000 000 000"></div>
-      <div class="form-group"><label for="org">Organization</label><input type="text" id="org" placeholder="Company / Brand"></div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="+233 000 000 000">
+      </div>
+      <div class="form-group">
+        <label for="org">Organization</label>
+        <input type="text" id="org" placeholder="Company / Brand">
+      </div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label for="country">Country</label><input type="text" id="country" placeholder="Your country"></div>
-      <div class="form-group"><label for="eventDate">Event Date</label><input type="date" id="eventDate"></div>
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input type="text" id="country" placeholder="Your country">
+      </div>
+      <div class="form-group">
+        <label for="eventDate">Event Date</label>
+        <input type="date" id="eventDate">
+      </div>
     </div>
-    <div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="Tell us about your event..."></textarea></div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Tell us about your event..."></textarea>
+    </div>
     <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Booking Request</button>
   </form>
 </section>
 
+<!-- ============================================
+     PAGE: CONTACT (WHATSAPP)
+============================================ -->
 <section class="contact page" id="contact">
   <div class="section-header reveal">
     <span class="section-tag">Get In Touch</span>
@@ -429,27 +1068,40 @@ section{padding:120px 5%;position:relative}
   <div class="contact-grid">
     <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27m%20reaching%20out%20regarding%20management." class="contact-card reveal" target="_blank" rel="noopener">
       <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-      <h3>Management</h3><p>For management inquiries</p><span class="whatsapp-number">+233 50 495 8343</span>
+      <h3>Management</h3>
+      <p>For management inquiries</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
     </a>
     <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27d%20like%20to%20book%20you%20for%20an%20event." class="contact-card reveal" target="_blank" rel="noopener">
       <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-      <h3>Bookings</h3><p>Live shows & events</p><span class="whatsapp-number">+233 50 495 8343</span>
+      <h3>Bookings</h3>
+      <p>Live shows & events</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
     </a>
     <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27m%20from%20the%20press%20and%20would%20like%20to%20arrange%20an%20interview." class="contact-card reveal" target="_blank" rel="noopener">
       <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-      <h3>Press & Media</h3><p>Media & interviews</p><span class="whatsapp-number">+233 50 495 8343</span>
+      <h3>Press & Media</h3>
+      <p>Media & interviews</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
     </a>
     <a href="https://wa.me/233504958343?text=Hi%20FlackoB%2C%20I%27d%20like%20to%20discuss%20a%20collaboration." class="contact-card reveal" target="_blank" rel="noopener">
       <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-      <h3>Collaborations</h3><p>Features & features</p><span class="whatsapp-number">+233 50 495 8343</span>
+      <h3>Collaborations</h3>
+      <p>Features & features</p>
+      <span class="whatsapp-number">+233 50 495 8343</span>
     </a>
     <div class="contact-card reveal">
       <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
-      <h3>Location</h3><p>Accra, Ghana</p><span class="whatsapp-number" style="color:var(--muted)">Originally from Liberia</span>
+      <h3>Location</h3>
+      <p>Accra, Ghana</p>
+      <span class="whatsapp-number" style="color:var(--muted)">Originally from Liberia</span>
     </div>
   </div>
 </section>
 
+<!-- ============================================
+     PAGE: SOCIALS
+============================================ -->
 <section class="socials-section page" id="socials">
   <div class="section-header reveal">
     <span class="section-tag">Stay Connected</span>
@@ -469,12 +1121,41 @@ section{padding:120px 5%;position:relative}
   </div>
 </section>
 
+<!-- ============================================
+     FOOTER (always visible on ALL pages)
+============================================ -->
 <footer>
   <div class="footer-grid">
-    <div class="footer-brand"><h3>FLACKOB</h3><p>Liberian recording artist based in Ghana. Taking Liberia's sound to Africa and the world.</p></div>
-    <div class="footer-col"><h4>Explore</h4><ul><li><a data-page="home">Home</a></li><li><a data-page="about">About</a></li><li><a data-page="music">Music</a></li><li><a data-page="videos">Videos</a></li></ul></div>
-    <div class="footer-col"><h4>Connect</h4><ul><li><a data-page="gallery">Gallery</a></li><li><a data-page="events">Events</a></li><li><a data-page="booking">Booking</a></li><li><a data-page="contact">Contact</a></li></ul></div>
-    <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Cookie Policy</a></li></ul></div>
+    <div class="footer-brand">
+      <h3>FLACKOB</h3>
+      <p>Liberian recording artist based in Ghana. Taking Liberia's sound to Africa and the world.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a data-page="home">Home</a></li>
+        <li><a data-page="about">About</a></li>
+        <li><a data-page="music">Music</a></li>
+        <li><a data-page="videos">Videos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a data-page="gallery">Gallery</a></li>
+        <li><a data-page="events">Events</a></li>
+        <li><a data-page="booking">Booking</a></li>
+        <li><a data-page="contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 FlackoB. All Rights Reserved. Designed with <span class="heart">❤</span> for FlackoB.</p>
@@ -482,158 +1163,80 @@ section{padding:120px 5%;position:relative}
   </div>
 </footer>
 
-<button class="share-btn" id="shareBtn" aria-label="Share this website"><i class="fas fa-share-nodes"></i></button>
+<!-- ============================================
+     FLOATING BUTTONS
+============================================ -->
+<!-- Share Button -->
+<button class="share-btn" id="shareBtn" aria-label="Share this website">
+  <i class="fas fa-share-nodes"></i>
+</button>
+
+<!-- Back to Top -->
 <button class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+<!-- ============================================
+     SHARE MODAL
+============================================ -->
 <div class="share-modal" id="shareModal">
   <div class="share-modal-content">
     <button class="share-modal-close" id="shareModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
     <h3>Share <span style="color:var(--gold)">FlackoB</span></h3>
     <p>Spread the word — share the official website with your friends and fans.</p>
     <div class="share-options">
-      <a class="share-option whatsapp" id="shareWhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
-      <a class="share-option facebook" id="shareFacebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
-      <a class="share-option twitter" id="shareTwitter" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i><span>X / Twitter</span></a>
-      <a class="share-option telegram" id="shareTelegram" target="_blank" rel="noopener"><i class="fab fa-telegram"></i><span>Telegram</span></a>
-      <button class="share-option copy" id="shareCopy"><i class="fas fa-link"></i><span>Copy Link</span></button>
-      <button class="share-option native" id="shareNative" style="display:none"><i class="fas fa-share"></i><span>More</span></button>
+      <a class="share-option whatsapp" id="shareWhatsApp" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+      <a class="share-option facebook" id="shareFacebook" target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+        <span>Facebook</span>
+      </a>
+      <a class="share-option twitter" id="shareTwitter" target="_blank" rel="noopener">
+        <i class="fab fa-x-twitter"></i>
+        <span>X / Twitter</span>
+      </a>
+      <a class="share-option telegram" id="shareTelegram" target="_blank" rel="noopener">
+        <i class="fab fa-telegram"></i>
+        <span>Telegram</span>
+      </a>
+      <button class="share-option copy" id="shareCopy">
+        <i class="fas fa-link"></i>
+        <span>Copy Link</span>
+      </button>
+      <button class="share-option native" id="shareNative" style="display:none">
+        <i class="fas fa-share"></i>
+        <span>More</span>
+      </button>
     </div>
   </div>
 </div>
+
+<!-- Copy Toast -->
 <div class="copy-toast" id="copyToast"><i class="fas fa-check"></i> Link copied!</div>
 
-<style>
-/* Gallery 3D Motion & Engagement Styles */
-.gallery{background:var(--bg-secondary)}
-.gallery-grid{columns:3;column-gap:20px;max-width:1300px;margin:0 auto}
-.gallery-item{break-inside:avoid;margin-bottom:20px;border-radius:15px;overflow:hidden;cursor:pointer;position:relative;transform-style:preserve-3d;box-shadow:0 10px 25px rgba(0,0,0,0.4);animation:floatGallery 6s ease-in-out infinite}
-.gallery-item:nth-child(2n){animation-delay:1s}
-.gallery-item:nth-child(3n){animation-delay:2s}
-.gallery-item:nth-child(4n){animation-delay:0.5s}
-@keyframes floatGallery{0%,100%{transform:translateY(0) perspective(1000px) rotateX(0deg) rotateY(0deg)}50%{transform:translateY(-12px) perspective(1000px) rotateX(3deg) rotateY(-3deg)}}
-.gallery-item img{width:100%;display:block;transition:transform 0.6s var(--transition)}
-.gallery-overlay{position:absolute;bottom:0;left:0;right:0;padding:25px 15px 15px;background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);display:flex;justify-content:center;align-items:flex-end;opacity:0;transform:translateY(20px);transition:all 0.4s var(--transition);z-index:2;pointer-events:none}
-.gallery-item:hover .gallery-overlay{opacity:1;transform:translateY(0);pointer-events:auto}
-.gallery-engagement{display:flex;gap:12px;width:100%;justify-content:center}
-.engage-btn{display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:8px 14px;color:var(--white);font-size:0.7rem;font-weight:600;letter-spacing:0.5px;cursor:pointer;transition:all 0.3s ease;backdrop-filter:blur(8px);pointer-events:auto}
-.engage-btn i{font-size:1.1rem;transition:transform 0.3s ease}
-.engage-btn .count{font-size:0.8rem;font-weight:700;color:var(--gold);margin-top:2px}
-.engage-btn:hover{background:rgba(212,175,55,0.2);border-color:var(--gold);color:var(--gold);transform:translateY(-4px)}
-.engage-btn:hover i{transform:scale(1.2)}
-.engage-btn.love-active{color:#ff0050;border-color:#ff0050;background:rgba(255,0,80,0.15)}
-.engage-btn.love-active i{animation:heartPop 0.4s ease}
-.engage-btn.like-active{color:var(--gold);border-color:var(--gold);background:rgba(212,175,55,0.15)}
-.engage-btn.like-active i{animation:likePop 0.4s ease}
-@keyframes heartPop{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
-@keyframes likePop{0%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.3) rotate(-10deg)}100%{transform:scale(1) rotate(0deg)}}
-.gallery-item:hover{animation:none;transform:perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.05) translateZ(20px);box-shadow:0 30px 60px rgba(212,175,55,0.4);z-index:10;border:1px solid var(--gold)}
-.gallery-item:hover img{transform:scale(1.15)}
-@media (max-width:900px){.gallery-grid{columns:2}}
-@media (max-width:500px){.gallery-grid{columns:1}}
-
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
-.lightbox.active{display:flex;animation:fadeIn .3s ease}
-.lightbox img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 0 60px rgba(212,175,55,.2)}
-.lightbox-close{position:absolute;top:30px;right:30px;width:50px;height:50px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);color:var(--gold);font-size:1.3rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease}
-.lightbox-close:hover{background:var(--gold);color:#000;transform:rotate(90deg)}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-.booking{background:linear-gradient(135deg,rgba(0,40,104,.2) 0%,rgba(5,5,5,.95) 50%,rgba(191,10,48,.15) 100%)}
-.booking-form{max-width:800px;margin:0 auto;background:rgba(20,20,20,0.5);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:25px;padding:50px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
-.form-group{margin-bottom:20px;position:relative}
-.form-group label{display:block;color:var(--gold);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
-.form-group input,.form-group textarea{width:100%;padding:15px 20px;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;color:var(--white);font-family:inherit;font-size:.95rem;transition:all .3s var(--transition)}
-.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);background:rgba(212,175,55,.05);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
-.form-group textarea{resize:vertical;min-height:120px}
-.booking-form .btn{width:100%;justify-content:center;margin-top:10px;padding:18px}
-@media (max-width:600px){.form-row{grid-template-columns:1fr}}
-
-.contact{background:var(--bg-secondary)}
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:1200px;margin:0 auto}
-.contact-card{padding:40px 30px;text-align:center;background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;transition:all .4s var(--transition);display:block}
-.contact-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:var(--shadow-gold)}
-.contact-icon{width:70px;height:70px;margin:0 auto 20px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;box-shadow:0 10px 30px rgba(37,211,102,.3)}
-.contact-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--white);letter-spacing:2px;margin-bottom:10px}
-.contact-card p{color:var(--light-grey);font-size:.9rem;line-height:1.7}
-.contact-card .whatsapp-number{color:var(--gold);font-weight:600;font-size:1rem;margin-top:10px;display:block}
-
-.socials-section{background:var(--bg-primary);padding:100px 5%}
-.socials-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:1100px;margin:0 auto}
-.social-icon{width:75px;height:75px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:1.6rem;transition:all .4s var(--transition);position:relative;overflow:hidden}
-.social-icon::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold),var(--gold-dark));opacity:0;transition:opacity .4s ease}
-.social-icon i{position:relative;z-index:1;transition:transform .4s ease}
-.social-icon:hover{transform:translateY(-8px) scale(1.1);border-color:var(--gold);box-shadow:0 15px 40px rgba(212,175,55,.4)}
-.social-icon:hover::before{opacity:1}
-.social-icon:hover i{color:#000;transform:rotate(360deg)}
-.social-icon.tiktok:hover::before{background:linear-gradient(135deg,#ff0050,#00f2ea)}
-.social-icon.youtube:hover::before{background:#FF0000}
-.social-icon.spotify:hover::before{background:#1DB954}
-.social-icon.instagram:hover::before{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
-.social-icon.facebook:hover::before{background:#1877F2}
-.social-icon.apple:hover::before{background:linear-gradient(135deg,#fc3c44,#000)}
-.social-icon.x:hover::before{background:#000}
-
-footer{background:#000;padding:60px 5% 30px;border-top:1px solid var(--glass-border)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1300px;margin:0 auto 40px}
-.footer-brand h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:4px;margin-bottom:15px}
-.footer-brand p{color:var(--muted);font-size:.9rem;max-width:300px}
-.footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--white);letter-spacing:2px;margin-bottom:20px}
-.footer-col ul{list-style:none}
-.footer-col li{margin-bottom:10px}
-.footer-col a{color:var(--muted);font-size:.9rem;transition:color .3s;cursor:pointer}
-.footer-col a:hover{color:var(--gold)}
-.footer-bottom{max-width:1300px;margin:0 auto;padding-top:30px;border-top:1px solid var(--glass-border);text-align:center;color:var(--muted);font-size:.85rem}
-.footer-bottom .heart{color:var(--liberian-red);animation:pulse 1.5s infinite}
-.footer-powered{margin-top:15px;color:var(--gold);font-size:.85rem;letter-spacing:1px}
-@media (max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;gap:30px}}
-@media (max-width:500px){.footer-grid{grid-template-columns:1fr}}
-
-.back-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;z-index:998;opacity:0;visibility:hidden;transform:translateY(20px);transition:all .4s var(--transition);box-shadow:0 10px 30px rgba(212,175,55,.4)}
-.back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
-.back-top:hover{transform:translateY(-5px) scale(1.1)}
-
-.share-btn{position:fixed;bottom:95px;right:30px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--liberian-blue),#001a44);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;z-index:998;box-shadow:0 10px 30px rgba(0,40,104,.5);transition:all .4s var(--transition);border:1px solid rgba(212,175,55,.3)}
-.share-btn:hover{transform:translateY(-5px) scale(1.1);box-shadow:0 15px 40px rgba(0,40,104,.7);border-color:var(--gold)}
-.share-btn i{transition:transform .4s var(--transition)}
-.share-btn:hover i{transform:rotate(15deg)}
-
-.share-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:2500;padding:20px}
-.share-modal.active{display:flex;animation:fadeIn .3s ease}
-.share-modal-content{background:rgba(20,20,20,0.95);border:1px solid var(--glass-border);border-radius:25px;padding:40px;max-width:500px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);position:relative}
-.share-modal-close{position:absolute;top:15px;right:15px;width:40px;height:40px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);color:var(--gold);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease}
-.share-modal-close:hover{background:var(--gold);color:#000;transform:rotate(90deg)}
-.share-modal h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--white);letter-spacing:2px;margin-bottom:10px}
-.share-modal p{color:var(--muted);font-size:.9rem;margin-bottom:30px}
-.share-options{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.share-option{padding:20px 10px;border-radius:15px;background:var(--glass);border:1px solid var(--glass-border);display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:all .3s var(--transition);color:var(--white);font-size:.75rem;letter-spacing:1px;text-transform:uppercase}
-.share-option i{font-size:1.5rem;transition:transform .3s ease}
-.share-option:hover{transform:translateY(-5px)}
-.share-option:hover i{transform:scale(1.2)}
-.share-option.whatsapp{color:#25D366}.share-option.whatsapp:hover{background:rgba(37,211,102,.1);border-color:#25D366}
-.share-option.facebook{color:#1877F2}.share-option.facebook:hover{background:rgba(24,119,242,.1);border-color:#1877F2}
-.share-option.twitter{color:#fff}.share-option.twitter:hover{background:rgba(255,255,255,.1);border-color:#fff}
-.share-option.telegram{color:#0088cc}.share-option.telegram:hover{background:rgba(0,136,204,.1);border-color:#0088cc}
-.share-option.copy{color:var(--gold)}.share-option.copy:hover{background:rgba(212,175,55,.1);border-color:var(--gold)}
-.share-option.native{color:#ff0050}.share-option.native:hover{background:rgba(255,0,80,.1);border-color:#ff0050}
-
-.copy-toast{position:fixed;bottom:160px;right:30px;padding:12px 24px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#000;border-radius:30px;font-weight:600;font-size:.85rem;letter-spacing:1px;box-shadow:0 10px 30px rgba(212,175,55,.4);z-index:3000;opacity:0;visibility:hidden;transform:translateY(20px);transition:all .4s var(--transition)}
-.copy-toast.show{opacity:1;visibility:visible;transform:translateY(0)}
-@media (max-width:500px){.share-options{grid-template-columns:repeat(2,1fr)}.share-modal-content{padding:30px 20px}}
-
-.reveal{opacity:0;transform:translateY(40px);transition:all .8s var(--transition)}
-.reveal.active{opacity:1;transform:translateY(0)}
-.reveal-left{transform:translateX(-40px)}.reveal-left.active{transform:translateX(0)}
-.reveal-right{transform:translateX(40px)}.reveal-right.active{transform:translateX(0)}
-.reveal-zoom{transform:scale(.8)}.reveal-zoom.active{transform:scale(1)}
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-</style>
-
+<!-- ============================================
+     JAVASCRIPT
+============================================ -->
 <script>
-window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('hide'),800)});
-const mouseGlow=document.getElementById('mouseGlow');
-document.addEventListener('mousemove',e=>{mouseGlow.style.left=e.clientX+'px';mouseGlow.style.top=e.clientY+'px'});
+/* ============================================
+   LOADING SCREEN
+============================================ */
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.getElementById('loader').classList.add('hide'),800);
+});
 
+/* ============================================
+   MOUSE GLOW
+============================================ */
+const mouseGlow=document.getElementById('mouseGlow');
+document.addEventListener('mousemove',e=>{
+  mouseGlow.style.left=e.clientX+'px';
+  mouseGlow.style.top=e.clientY+'px';
+});
+
+/* ============================================
+   PAGE-BASED NAVIGATION
+============================================ */
 const pages=document.querySelectorAll('.page');
 const navLinks=document.querySelectorAll('[data-page]');
 const navbar=document.getElementById('navbar');
@@ -645,23 +1248,43 @@ function showPage(pageId){
   const target=document.getElementById(pageId);
   if(target){
     target.classList.add('active');
-    target.querySelectorAll('.reveal').forEach(el=>{el.classList.remove('active');void el.offsetWidth;setTimeout(()=>el.classList.add('active'),50)});
+    target.querySelectorAll('.reveal').forEach(el=>{
+      el.classList.remove('active');
+      void el.offsetWidth;
+      setTimeout(()=>el.classList.add('active'),50);
+    });
     if(pageId==='about'){
       target.querySelectorAll('.stat-number').forEach(el=>{
-        const target2=+el.dataset.count;let current=0;const step=target2/60;el.textContent='0';
-        const update=()=>{current+=step;if(current<target2){el.textContent=Math.ceil(current);requestAnimationFrame(update)}else el.textContent=target2};
+        const target2=+el.dataset.count;
+        let current=0;
+        const step=target2/60;
+        el.textContent='0';
+        const update=()=>{
+          current+=step;
+          if(current<target2){
+            el.textContent=Math.ceil(current);
+            requestAnimationFrame(update);
+          }else el.textContent=target2;
+        };
         setTimeout(update,300);
       });
     }
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  document.querySelectorAll('.nav-menu a').forEach(link=>{link.classList.remove('active');if(link.dataset.page===pageId) link.classList.add('active')});
+  document.querySelectorAll('.nav-menu a').forEach(link=>{
+    link.classList.remove('active');
+    if(link.dataset.page===pageId) link.classList.add('active');
+  });
 }
 
 navLinks.forEach(link=>{
   link.addEventListener('click',e=>{
-    e.preventDefault();showPage(link.dataset.page);
-    navMenu.classList.remove('open');navToggle.querySelector('i').classList.add('fa-bars');navToggle.querySelector('i').classList.remove('fa-times');
+    e.preventDefault();
+    const pageId=link.dataset.page;
+    showPage(pageId);
+    navMenu.classList.remove('open');
+    navToggle.querySelector('i').classList.add('fa-bars');
+    navToggle.querySelector('i').classList.remove('fa-times');
   });
 });
 
@@ -669,60 +1292,211 @@ window.addEventListener('scroll',()=>{
   navbar.classList.toggle('scrolled',window.scrollY>50);
   document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
 });
-navToggle.addEventListener('click',()=>{navMenu.classList.toggle('open');const icon=navToggle.querySelector('i');icon.classList.toggle('fa-bars');icon.classList.toggle('fa-times')});
 
+navToggle.addEventListener('click',()=>{
+  navMenu.classList.toggle('open');
+  const icon=navToggle.querySelector('i');
+  icon.classList.toggle('fa-bars');
+  icon.classList.toggle('fa-times');
+});
+
+/* ============================================
+   TYPING EFFECT (Classic Vibe)
+============================================ */
 const typingEl=document.getElementById('typingText');
-const phrases=['Liberian Recording Artist • Based in Ghana','Songwriter • Performer • Entertainer','Afrobeat • Afropop • Hip-Hop • Drill • Trap','Taking Liberia to the World'];
+const phrases=[
+  'Liberian Recording Artist • Based in Ghana',
+  'Songwriter • Performer • Entertainer',
+  'Afrobeat • Afropop • Hip-Hop • Drill • Trap',
+  'Taking Liberia to the World'
+];
 let pIndex=0,cIndex=0,isDeleting=false;
 function typeEffect(){
   const current=phrases[pIndex];
-  if(isDeleting){typingEl.textContent=current.substring(0,cIndex--);if(cIndex<0){isDeleting=false;pIndex=(pIndex+1)%phrases.length;setTimeout(typeEffect,400);return}}
-  else{typingEl.textContent=current.substring(0,cIndex++);if(cIndex>current.length){isDeleting=true;setTimeout(typeEffect,2000);return}}
+  if(isDeleting){
+    typingEl.textContent=current.substring(0,cIndex--);
+    if(cIndex<0){isDeleting=false;pIndex=(pIndex+1)%phrases.length;setTimeout(typeEffect,400);return}
+  }else{
+    typingEl.textContent=current.substring(0,cIndex++);
+    if(cIndex>current.length){isDeleting=true;setTimeout(typeEffect,2000);return}
+  }
   setTimeout(typeEffect,isDeleting?40:80);
 }
 typeEffect();
 
-const canvas=document.getElementById('particles-canvas');const ctx=canvas.getContext('2d');let particles=[];
+/* ============================================
+   PARTICLES
+============================================ */
+const canvas=document.getElementById('particles-canvas');
+const ctx=canvas.getContext('2d');
+let particles=[];
 function resizeCanvas(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
-resizeCanvas();window.addEventListener('resize',resizeCanvas);
-class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+0.5;this.speedX=(Math.random()-0.5)*0.5;this.speedY=(Math.random()-0.5)*0.5;this.opacity=Math.random()*0.5+0.2}
-update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x<0||this.x>canvas.width) this.speedX*=-1;if(this.y<0||this.y>canvas.height) this.speedY*=-1}
-draw(){ctx.fillStyle=`rgba(212,175,55,${this.opacity})`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+
+class Particle{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.size=Math.random()*2+0.5;
+    this.speedX=(Math.random()-0.5)*0.5;
+    this.speedY=(Math.random()-0.5)*0.5;
+    this.opacity=Math.random()*0.5+0.2;
+  }
+  update(){
+    this.x+=this.speedX;this.y+=this.speedY;
+    if(this.x<0||this.x>canvas.width) this.speedX*=-1;
+    if(this.y<0||this.y>canvas.height) this.speedY*=-1;
+  }
+  draw(){
+    ctx.fillStyle=`rgba(212,175,55,${this.opacity})`;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+  }
+}
 for(let i=0;i<60;i++) particles.push(new Particle());
-function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});for(let a=0;a<particles.length;a++){for(let b=a+1;b<particles.length;b++){const dx=particles[a].x-particles[b].x;const dy=particles[a].y-particles[b].y;const dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){ctx.strokeStyle=`rgba(212,175,55,${0.15*(1-dist/120)})`;ctx.lineWidth=0.5;ctx.beginPath();ctx.moveTo(particles[a].x,particles[a].y);ctx.lineTo(particles[b].x,particles[b].y);ctx.stroke()}}}requestAnimationFrame(animateParticles)}
+
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{p.update();p.draw()});
+  for(let a=0;a<particles.length;a++){
+    for(let b=a+1;b<particles.length;b++){
+      const dx=particles[a].x-particles[b].x;
+      const dy=particles[a].y-particles[b].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.strokeStyle=`rgba(212,175,55,${0.15*(1-dist/120)})`;
+        ctx.lineWidth=0.5;
+        ctx.beginPath();
+        ctx.moveTo(particles[a].x,particles[a].y);
+        ctx.lineTo(particles[b].x,particles[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
 animateParticles();
 
-const revealObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');revealObs.unobserve(e.target)}})},{threshold:0.15});
+/* ============================================
+   SCROLL REVEAL
+============================================ */
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('active');
+      revealObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.15});
 document.querySelectorAll('.page.active .reveal').forEach(el=>revealObs.observe(el));
 
-const lightbox=document.getElementById('lightbox');const lightboxImg=document.getElementById('lightboxImg');const lightboxClose=document.getElementById('lightboxClose');
+/* ============================================
+   GALLERY LIGHTBOX
+============================================ */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightboxImg');
+const lightboxClose=document.getElementById('lightboxClose');
 document.querySelectorAll('.gallery-item').forEach(item=>{
-  item.addEventListener('click',e=>{if(e.target.closest('.engage-btn')) return;const img=item.querySelector('img');lightboxImg.src=img.src;lightboxImg.alt=img.alt;lightbox.classList.add('active')});
-  const loveBtn=item.querySelector('.love-btn');const likeBtn=item.querySelector('.like-btn');
-  loveBtn.addEventListener('click',e=>{e.stopPropagation();loveBtn.classList.toggle('love-active');let count=parseInt(loveBtn.dataset.count)||0;count=loveBtn.classList.contains('love-active')?count+1:Math.max(0,count-1);loveBtn.dataset.count=count;loveBtn.querySelector('.count').textContent=count});
-  likeBtn.addEventListener('click',e=>{e.stopPropagation();likeBtn.classList.toggle('like-active');let count=parseInt(likeBtn.dataset.count)||0;count=likeBtn.classList.contains('like-active')?count+1:Math.max(0,count-1);likeBtn.dataset.count=count;likeBtn.querySelector('.count').textContent=count});
+  item.addEventListener('click',()=>{
+    const img=item.querySelector('img');
+    lightboxImg.src=img.src;
+    lightboxImg.alt=img.alt;
+    lightbox.classList.add('active');
+  });
 });
 lightboxClose.addEventListener('click',()=>lightbox.classList.remove('active'));
 lightbox.addEventListener('click',e=>{if(e.target===lightbox) lightbox.classList.remove('active')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){lightbox.classList.remove('active');document.getElementById('shareModal').classList.remove('active')}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){
+  lightbox.classList.remove('active');
+  document.getElementById('shareModal').classList.remove('active');
+}});
 
-document.getElementById('bookingForm').addEventListener('submit',e=>{e.preventDefault();const btn=e.target.querySelector('button');const original=btn.innerHTML;btn.innerHTML='<i class="fas fa-check"></i> Request Sent!';btn.style.background='linear-gradient(135deg,#2ecc71,#27ae60)';setTimeout(()=>{btn.innerHTML=original;btn.style.background='';e.target.reset()},3000)});
-document.getElementById('backTop').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
-window.addEventListener('scroll',()=>{const hero=document.querySelector('.hero-bg');if(hero && document.getElementById('home').classList.contains('active')){hero.style.transform=`translateY(${window.scrollY*0.3}px)`}});
+/* ============================================
+   BOOKING FORM
+============================================ */
+document.getElementById('bookingForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const btn=e.target.querySelector('button');
+  const original=btn.innerHTML;
+  btn.innerHTML='<i class="fas fa-check"></i> Request Sent!';
+  btn.style.background='linear-gradient(135deg,#2ecc71,#27ae60)';
+  setTimeout(()=>{
+    btn.innerHTML=original;
+    btn.style.background='';
+    e.target.reset();
+  },3000);
+});
 
-const shareBtn=document.getElementById('shareBtn');const shareModal=document.getElementById('shareModal');const shareModalClose=document.getElementById('shareModalClose');
-const siteUrl=window.location.href;const siteTitle='FlackoB — Official Website';const shareText='Check out FlackoB — Liberian Recording Artist based in Ghana. Taking Liberia\'s sound to Africa and the World!';
+/* ============================================
+   BACK TO TOP
+============================================ */
+document.getElementById('backTop').addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ============================================
+   PARALLAX HERO
+============================================ */
+window.addEventListener('scroll',()=>{
+  const hero=document.querySelector('.hero-bg');
+  if(hero && document.getElementById('home').classList.contains('active')){
+    const scrolled=window.scrollY;
+    hero.style.transform=`translateY(${scrolled*0.3}px)`;
+  }
+});
+
+/* ============================================
+   SHARE BUTTON & MODAL
+============================================ */
+const shareBtn=document.getElementById('shareBtn');
+const shareModal=document.getElementById('shareModal');
+const shareModalClose=document.getElementById('shareModalClose');
+const siteUrl=window.location.href;
+const siteTitle='FlackoB — Official Website';
+const shareText='Check out FlackoB — Liberian Recording Artist based in Ghana. Taking Liberia\'s sound to Africa and the World!';
+
 document.getElementById('shareWhatsApp').href=`https://wa.me/?text=${encodeURIComponent(shareText+' '+siteUrl)}`;
 document.getElementById('shareFacebook').href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}`;
 document.getElementById('shareTwitter').href=`https://twitter.com/intent/tweet?url=${encodeURIComponent(siteUrl)}&text=${encodeURIComponent(shareText)}`;
 document.getElementById('shareTelegram').href=`https://t.me/share/url?url=${encodeURIComponent(siteUrl)}&text=${encodeURIComponent(shareText)}`;
-if(navigator.share) document.getElementById('shareNative').style.display='flex';
+
+if(navigator.share){
+  document.getElementById('shareNative').style.display='flex';
+}
+
 function openShareModal(){shareModal.classList.add('active')}
 function closeShareModal(){shareModal.classList.remove('active')}
-shareBtn.addEventListener('click',openShareModal);shareModalClose.addEventListener('click',closeShareModal);shareModal.addEventListener('click',e=>{if(e.target===shareModal) closeShareModal()});
-document.getElementById('shareCopy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(siteUrl);const toast=document.getElementById('copyToast');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2500)}catch(err){const ta=document.createElement('textarea');ta.value=siteUrl;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);const toast=document.getElementById('copyToast');toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2500)}});
-document.getElementById('shareNative').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:siteTitle,text:shareText,url:siteUrl});closeShareModal()}catch(err){}}});
+
+shareBtn.addEventListener('click',openShareModal);
+shareModalClose.addEventListener('click',closeShareModal);
+shareModal.addEventListener('click',e=>{if(e.target===shareModal) closeShareModal()});
+
+document.getElementById('shareCopy').addEventListener('click',async()=>{
+  try{
+    await navigator.clipboard.writeText(siteUrl);
+    const toast=document.getElementById('copyToast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),2500);
+  }catch(err){
+    const ta=document.createElement('textarea');
+    ta.value=siteUrl;document.body.appendChild(ta);
+    ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    const toast=document.getElementById('copyToast');
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),2500);
+  }
+});
+
+document.getElementById('shareNative').addEventListener('click',async()=>{
+  if(navigator.share){
+    try{
+      await navigator.share({title:siteTitle,text:shareText,url:siteUrl});
+      closeShareModal();
+    }catch(err){}
+  }
+});
 </script>
 </body>
 </html>
-</section>
