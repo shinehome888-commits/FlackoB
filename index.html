@@ -75,7 +75,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .page{
   display:none;
   animation:pageFade .6s var(--transition);
-  min-height:100vh; /* Ensures short pages fill the screen nicely */
+  min-height:100vh;
 }
 .page.active{display:block}
 @keyframes pageFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -187,10 +187,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .hero-bg{
   position:absolute;inset:0;
-  /* Strong overlay ensures text is perfectly clear over the background image */
+  /* Optimized to show the entire picture beautifully while keeping text readable */
   background:
-    linear-gradient(135deg, rgba(5,5,5,0.92) 0%, rgba(0,40,104,0.7) 50%, rgba(5,5,5,0.95) 100%),
-    url('https://i.ibb.co/G3HmZpYF/3-DF653-EF-D834-4518-909-B-574-F8-CAFFB5-F.jpg') center/cover no-repeat;
+    linear-gradient(135deg, rgba(5,5,5,0.75) 0%, rgba(0,40,104,0.5) 50%, rgba(5,5,5,0.85) 100%),
+    url('https://i.ibb.co/q31XkB2d/c10d3f3d-ab8d-4791-be43-2b8d51abbc83-1.jpg') center/cover no-repeat;
   z-index:-2;
 }
 .hero-bg::after{
@@ -228,7 +228,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   text-transform:uppercase;margin-bottom:25px;
   animation:fadeUp 1s .6s both;
   font-weight:500;
-  min-height: 2rem; /* Prevents layout shift during typing */
+  min-height: 2rem;
 }
 .hero-quote{
   font-style:italic;color:var(--muted);
@@ -315,7 +315,7 @@ section{padding:120px 5%;position:relative}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
 /* ============================================
-   ABOUT SECTION
+   ABOUT SECTION (3D Motion)
 ============================================ */
 .about{background:var(--bg-secondary)}
 .about-grid{
@@ -325,12 +325,19 @@ section{padding:120px 5%;position:relative}
 .about-image{
   position:relative;border-radius:20px;overflow:hidden;
   aspect-ratio:3/4;
+  /* 3D Moving Right to Left Animation */
+  animation: moveRightLeft3D 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+@keyframes moveRightLeft3D {
+  0% { transform: translateX(40px) perspective(1000px) rotateY(-8deg) scale(1); box-shadow: -20px 20px 40px rgba(0,0,0,0.6); }
+  50% { transform: translateX(-40px) perspective(1000px) rotateY(8deg) scale(1.02); box-shadow: 20px 20px 40px rgba(212,175,55,0.25); }
+  100% { transform: translateX(40px) perspective(1000px) rotateY(-8deg) scale(1); box-shadow: -20px 20px 40px rgba(0,0,0,0.6); }
 }
 .about-image img{
   width:100%;height:100%;object-fit:cover;
   transition:transform .8s var(--transition);
 }
-.about-image:hover img{transform:scale(1.05)}
 .about-image::before{
   content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6) 100%);
@@ -340,6 +347,7 @@ section{padding:120px 5%;position:relative}
   content:'';position:absolute;top:-20px;left:-20px;
   width:100%;height:100%;border:2px solid var(--gold);
   border-radius:20px;z-index:-1;
+  animation: moveRightLeft3D 6s ease-in-out infinite; /* Sync border with image */
 }
 .about-content .section-tag{text-align:left}
 .about-content h2{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:25px}
@@ -422,7 +430,7 @@ section{padding:120px 5%;position:relative}
 .music-link:hover{background:var(--gold);color:#000;transform:translateY(-3px);box-shadow:0 5px 15px rgba(212,175,55,0.4)}
 
 /* ============================================
-   GALLERY
+   GALLERY (3D Touches)
 ============================================ */
 .gallery{background:var(--bg-secondary)}
 .gallery-grid{
@@ -432,17 +440,33 @@ section{padding:120px 5%;position:relative}
   break-inside:avoid;margin-bottom:20px;
   border-radius:15px;overflow:hidden;cursor:pointer;
   position:relative;
+  transition: all 0.5s var(--transition);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
-.gallery-item img{width:100%;display:block;transition:transform .6s var(--transition)}
+.gallery-item img{
+  width:100%;display:block;
+  transition:transform 0.6s var(--transition);
+}
 .gallery-item::after{
   content:'\f00e';font-family:'Font Awesome 6 Free';font-weight:900;
   position:absolute;inset:0;
   background:rgba(0,0,0,.6);color:var(--gold);
   display:flex;align-items:center;justify-content:center;
   font-size:2rem;opacity:0;transition:opacity .4s var(--transition);
+  z-index: 2;
+}
+.gallery-item:hover{
+  transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) scale(1.05) translateZ(20px);
+  box-shadow: 0 30px 60px rgba(212,175,55,0.35);
+  z-index: 10;
+  border: 1px solid var(--gold);
+}
+.gallery-item:hover img{
+  transform: scale(1.15);
 }
 .gallery-item:hover::after{opacity:1}
-.gallery-item:hover img{transform:scale(1.1)}
+
 @media (max-width:900px){.gallery-grid{columns:2}}
 @media (max-width:500px){.gallery-grid{columns:1}}
 
@@ -808,7 +832,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <section class="about page" id="about">
   <div class="about-grid">
     <div class="about-image reveal reveal-left">
-      <img src="images/flackob-1.jpg" alt="FlackoB - Liberian Recording Artist" onerror="this.style.background='linear-gradient(135deg,#002868,#BF0A30)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+      <img src="https://i.ibb.co/99jrwmK2/ac111f61-a88c-4566-9a22-2f7d635da7e3.jpg" alt="FlackoB - Liberian Recording Artist">
     </div>
     <div class="about-content reveal reveal-right">
       <span class="section-tag">About The Artist</span>
@@ -948,9 +972,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     <p class="section-desc">Behind the scenes, on stage, and everything in between.</p>
   </div>
   <div class="gallery-grid">
-    <div class="gallery-item reveal"><img src="images/gallery1.jpg" alt="Gallery 1" onerror="this.style.background='linear-gradient(135deg,#D4AF37,#002868)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery2.jpg" alt="Gallery 2" onerror="this.style.background='linear-gradient(135deg,#BF0A30,#000)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22/>'"></div>
-    <div class="gallery-item reveal"><img src="images/gallery3.jpg" alt="Gallery 3" onerror="this.style.background='linear-gradient(135deg,#002868,#D4AF37)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 600%22/>'"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/3yNyYT4M/4be2245f-4379-4c9c-a3db-815c91a5689f.jpg" alt="Gallery 1"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/WNJ0KrP6/8ccbe4da-bfe7-4bff-8ed7-602af84d5b13.jpg" alt="Gallery 2"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/qLh7rt9c/8f79bcdd-23ca-4f22-a158-491036da78ba.jpg" alt="Gallery 3"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/GfWJNmHW/33a4ca41-2750-48a4-854c-864380613000.jpg" alt="Gallery 4"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/35KcKc8C/388bbafa-d5cc-43d1-bde0-93facc86f720.jpg" alt="Gallery 5"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/1fzQknbL/3499c929-d922-4fe0-94f4-982f94f080bf.jpg" alt="Gallery 6"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/XxGDn0h2/32337406-dcab-48d8-9e4a-461a506c94cb-1.jpg" alt="Gallery 7"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/99jrwmK2/ac111f61-a88c-4566-9a22-2f7d635da7e3.jpg" alt="Gallery 8"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/kVN69CNq/ba15c622-2ed8-435f-aea0-963ac2bc6c52.jpg" alt="Gallery 9"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/hRXWDm3r/c10d3f3d-ab8d-4791-be43-2b8d51abbc83.jpg" alt="Gallery 10"></div>
+    <div class="gallery-item reveal"><img src="https://i.ibb.co/YFPMsYJ0/ca9867c3-b59b-4e01-a711-73a61b61264b.jpg" alt="Gallery 11"></div>
   </div>
 </section>
 
@@ -1216,13 +1248,11 @@ function showPage(pageId){
   const target=document.getElementById(pageId);
   if(target){
     target.classList.add('active');
-    // Re-trigger reveal animations
     target.querySelectorAll('.reveal').forEach(el=>{
       el.classList.remove('active');
       void el.offsetWidth;
       setTimeout(()=>el.classList.add('active'),50);
     });
-    // Re-trigger counters if about page
     if(pageId==='about'){
       target.querySelectorAll('.stat-number').forEach(el=>{
         const target2=+el.dataset.count;
@@ -1241,7 +1271,6 @@ function showPage(pageId){
     }
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  // Update active nav link
   document.querySelectorAll('.nav-menu a').forEach(link=>{
     link.classList.remove('active');
     if(link.dataset.page===pageId) link.classList.add('active');
@@ -1259,13 +1288,11 @@ navLinks.forEach(link=>{
   });
 });
 
-/* Navbar scroll effect */
 window.addEventListener('scroll',()=>{
   navbar.classList.toggle('scrolled',window.scrollY>50);
   document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
 });
 
-/* Mobile menu toggle */
 navToggle.addEventListener('click',()=>{
   navMenu.classList.toggle('open');
   const icon=navToggle.querySelector('i');
@@ -1298,7 +1325,7 @@ function typeEffect(){
 typeEffect();
 
 /* ============================================
-   PARTICLES (only on home)
+   PARTICLES
 ============================================ */
 const canvas=document.getElementById('particles-canvas');
 const ctx=canvas.getContext('2d');
@@ -1363,7 +1390,6 @@ const revealObs=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.15});
-
 document.querySelectorAll('.page.active .reveal').forEach(el=>revealObs.observe(el));
 
 /* ============================================
@@ -1431,13 +1457,11 @@ const siteUrl=window.location.href;
 const siteTitle='FlackoB — Official Website';
 const shareText='Check out FlackoB — Liberian Recording Artist based in Ghana. Taking Liberia\'s sound to Africa and the World!';
 
-// Build share URLs
 document.getElementById('shareWhatsApp').href=`https://wa.me/?text=${encodeURIComponent(shareText+' '+siteUrl)}`;
 document.getElementById('shareFacebook').href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}`;
 document.getElementById('shareTwitter').href=`https://twitter.com/intent/tweet?url=${encodeURIComponent(siteUrl)}&text=${encodeURIComponent(shareText)}`;
 document.getElementById('shareTelegram').href=`https://t.me/share/url?url=${encodeURIComponent(siteUrl)}&text=${encodeURIComponent(shareText)}`;
 
-// Show native share button if supported
 if(navigator.share){
   document.getElementById('shareNative').style.display='flex';
 }
@@ -1449,7 +1473,6 @@ shareBtn.addEventListener('click',openShareModal);
 shareModalClose.addEventListener('click',closeShareModal);
 shareModal.addEventListener('click',e=>{if(e.target===shareModal) closeShareModal()});
 
-// Copy link
 document.getElementById('shareCopy').addEventListener('click',async()=>{
   try{
     await navigator.clipboard.writeText(siteUrl);
@@ -1466,13 +1489,12 @@ document.getElementById('shareCopy').addEventListener('click',async()=>{
   }
 });
 
-// Native share
 document.getElementById('shareNative').addEventListener('click',async()=>{
   if(navigator.share){
     try{
       await navigator.share({title:siteTitle,text:shareText,url:siteUrl});
       closeShareModal();
-    }catch(err){/* user cancelled */}
+    }catch(err){}
   }
 });
 </script>
